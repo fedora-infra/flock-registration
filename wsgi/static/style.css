@@ -1,0 +1,288 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Cantarell', 'Droid Sans', 'Liberation Sans', sans-serif;
+	font-size: 12pt;
+}
+
+a {
+	color: #00d;
+}
+
+a:hover {
+	color: #44f;
+}
+
+#header {
+	font-family: 'Comfortaa', 'Cantarell', 'Droid Sans', 'Liberation Sans', sans-serif;
+}
+
+#header h1 {
+	margin: 0;
+	padding: .5em 10%;
+	width: 80%;
+	color: white;
+	background-color: #3c6eb4;
+	font-size: 1.5em;
+	font-weight: normal;
+}
+
+#header h2 {
+	margin: 0;
+	padding: .5em 10% 1.25em;
+	width: 80%;
+	color: white;
+	background-color: #a07cbc;
+	font-size: 2.5em;
+	font-weight: normal;
+	text-shadow: #294172 0 0.05em 0;
+}
+
+#flashes {
+	margin: 0;
+	padding: .5em 10%;
+	background-color: #ffa;
+	list-style: none;
+	text-align: center;
+}
+
+#flashes li {
+	margin: .25em 0;
+}
+
+#content {
+	margin: 1.5em 0;
+	padding: 0 10%;
+}
+
+.gray {
+	color: #555;
+}
+
+.gray a {
+	color: #33b;
+}
+
+.gray a:hover {
+	color: #55f;
+}
+
+.clear {
+	clear: both;
+	margin: 1em 0;
+}
+
+/* tables */
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+tr:nth-child(odd) {
+	background-color: #f6f6f6;
+}
+
+th, td {
+	border: 1px solid #333;
+	padding: 0.5ex;
+}
+
+th {
+	background-color: #ddd;
+}
+
+/* input elements */
+
+fieldset {
+	border: 0;
+	padding: 0;
+	margin: .5em 0;
+	float: left;
+	clear: both;
+}
+
+.row {
+	margin: .25em 0;
+}
+
+.row label:first-child {
+	width: 8em;
+	margin-right: 0.5em;
+	text-align: right;
+	display: inline-block;
+	clear: both;
+	font-weight: bold;
+}
+
+input.openid {
+	background-image: url("openid.gif");
+	background-repeat: no-repeat;
+	background-position: 4px center;
+	padding-left: 24px;
+}
+
+form .row .errors {
+	list-style: none;
+	margin: .5em 0 1em 11.5em;
+	padding: 0;
+	font-size: .8em;
+	color: #c00;
+}
+
+div.help {
+	width: 40%;
+	float: right;
+	background-color: #ffa;
+	border-top: 1px solid #ee9;
+	padding: 1em;
+	font-size: .8em;
+	margin: .625em 0;
+}
+
+div > *:first-child { margin-top: 0; }
+div > *:last-child { margin-bottom: 0; }
+
+/* button styles courtesy of musicbrainz.org */
+.buttons {
+	display: inline-block;
+}
+
+.buttons a {
+	text-align: center;
+}
+
+.buttons a,
+.buttons button,
+.buttons input[type=submit],
+.buttons input[type=button] {
+	display: block;
+	float: left;
+	margin: 0 7px 0 0;
+	background-color: #F0F0F0;
+	border: 1px solid #D0D0D0;
+	border-top: 1px solid #EAEAEA;
+	border-left: 1px solid #EAEAEA;
+	line-height: 130%;
+	text-decoration: none;
+	font-weight: bold;
+	color: #565656;
+	cursor: pointer;
+	padding: 5px 10px 6px 7px;
+	font-size: 11pt;
+}
+
+.buttons button,
+.buttons input[type=submit],
+.buttons input[type=button] {
+	width: auto;
+	overflow: visible;
+	padding: 4px 10px 3px 7px;
+}
+
+.buttons input[type],
+.buttons button[type] {
+	padding: 5px 10px 5px 7px;
+	line-height: 17px;
+}
+
+*:first-child+html input[type],
+*:first-child+html button[type] {
+	padding: 4px 10px 3px 7px;
+}
+
+.buttons a img,
+.buttons button img {
+	margin: 0 3px -3px 0 !important;
+	padding: 0;
+	border: none;
+	width: 16px;
+	height: 16px;
+}
+
+.buttons a:focus, input[type=submit]:focus, button:focus,
+.buttons a:hover, input[type=submit]:hover, button:hover {
+	background-color: #dff4ff;
+	border: 1px solid #c2e1ef;
+	color: #336699;
+}
+
+.buttons a:active {
+	background-color: #6299c5;
+	border: 1px solid #6299c5;
+	color: #fff;
+}
+
+.buttons a.positive,
+.buttons input[type=submit].positive,
+.buttons input[type=button].positive,
+.buttons button.positive {
+	color: #529214;
+}
+
+.buttons a.positive:hover, .buttons a.positive:focus,
+.buttons input[type=button].positive:hover, .buttons input[type=button].positive:focus,
+.buttons input[type=submit].positive:hover, .buttons input[type=submit].positive:focus,
+.buttons button.positive:hover, .buttons button.positive:focus {
+	background-color: #E6EFC2;
+	border: 1px solid #C6D880;
+	color: #529214;
+}
+
+.buttons a.positive:active {
+	background-color: #529214;
+	border: 1px solid #529214;
+	color: #fff;
+}
+
+.buttons a.negative,
+.buttons input[type=button].negative,
+.buttons input[type=submit].negative,
+.buttons button.negative {
+	color: #d12f19;
+}
+
+.buttons a.negative:hover, .buttons a.negative:focus,
+.buttons input[type=button].negative:hover, .buttons input[type=button].negative:focus,
+.buttons input[type=submit].negative:hover, .buttons input[type=submit].negative:focus,
+.buttons button.negative:hover, .buttons button.negative:focus {
+	background: #fbe3e4;
+	border: 1px solid #fbc2c4;
+	color: #d12f19;
+}
+
+.buttons a.negative:active {
+	background-color: #d12f19;
+	border: 1px solid #d12f19;
+	color: #fff;
+}
+
+.buttons.header-search {
+	display: inline;
+}
+
+.buttons.header-search button {
+	float: none;
+	display: inline;
+	padding: 2px 6px !important;
+}
+
+form div.row input[type=button],
+form input[type=button],
+form input[type=submit] {
+	color: #565656;
+	background-color: #F0F0F0;
+	border: 1px solid #D0D0D0;
+	border-top: 1px solid #EAEAEA;
+	border-left: 1px solid #EAEAEA;
+	cursor: pointer;
+	font-family: "Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	margin-top: 6px;
+}
+
+input[type=button].disabled,
+input[type=submit].disabled,
+button.disabled {
+	     color: #aaa;
+}

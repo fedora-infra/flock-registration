@@ -1,0 +1,7 @@
+This application was designed to be run on OpenShift (www.openshift.com). It is
+based on the Flask example from OpenShift on GitHub:
+  https://github.com/openshift/flask-example
+
+Set up an OpenShift application with the wsgi and mongodb cartridges. You will
+want to move wsgi/config_default.py to wsgi/config.py, then change SECRET_KEY
+and FUDCON_*. Then the application should Just Work(tm).

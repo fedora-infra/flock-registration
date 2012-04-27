@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block title %}Sign in{% endblock %}
+{% block body %}
+
+<h2>Sign in</h2>
+<form action="" method="post">
+  {% if error %}<p class="error"><strong>Error:</strong> {{ error }}</p>{% endif %}
+  OpenID:
+  <input type="text" name="openid" size="42" class="openid">
+  <input type="submit" value="Sign in">
+  <input type="hidden" name="next" value="{{ next }}">
+</form>
+
+<p>Please remember the OpenID you register with &mdash; in order to modify or remove your registration, you will need to log in with the same OpenID.</p>
+<p>If you have an account in the Fedora Accounts System, you can use <tt><em>fasusername</em>.id.fedoraproject.org</tt>, replacing <tt>fasusername</tt> with your FAS username.</p>
+<p><a href="http://openid.net/get-an-openid/">Don't have an OpenID? Learn more</a></p>
+
+{% endblock %}
+{# vim: set ts=2 sw=2 sta et: #}

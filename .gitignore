@@ -1,0 +1,5 @@
+wsgi/config.py
+.project
+*.pyc
+*.pyo
+*~
