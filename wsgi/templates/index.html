@@ -27,8 +27,8 @@
     <td>{% if registration.fasusername %}<a href="http://fedoraproject.org/wiki/User:{{ registration.fasusername|e }}">{% endif %}{{ registration.firstname|e }} {{ registration.lastname|e }}{% if registration.fasusername %}</a>{% endif %}</td>
     <td>{% if registration.funding %}Yes{% else %}No{% endif %}</td>
     <td>{{ registration.veg|e }}</td>
-    <td>{{ registration.volunteer|e }}</td>
-    <td>{{ registration.family|e }}</td>
+    <td>{% if registration.volunteer%}Yes{% else %}No{% endif %}</td>
+    <td>{% if registration.family%}Yes{% else %}No{% endif %}</td>
     <td>{{ registration.size|e }}</td>
     <td>{% if registration.roomshare == "Found roommate" %}{{ registration.roommate|e }}{% else %}{{ registration.roomshare|e }}{% endif %}</td>
     <td>{{ registration.hotel_booked|e }}</td>
