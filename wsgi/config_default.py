@@ -13,9 +13,9 @@ FUDCON_URL = "http://fedoraproject.org/wiki/FUDCon:Lawrence_2013"
 LOGFILE = os.path.join(os.getenv('OPENSHIFT_LOG_DIR'), 'flask_log')
 OPENID_STORE = os.path.join(os.getenv('OPENSHIFT_DATA_DIR'), 'openid_store')
 
-MONGO_HOST = os.getenv('OPENSHIFT_NOSQL_DB_HOST')
+MONGO_HOST = os.getenv('OPENSHIFT_MONGODB_DB_HOST')
 MONGO_DBNAME = 'fudcon-registrations'
-MONGO_USERNAME = os.getenv('OPENSHIFT_NOSQL_DB_USERNAME')
-MONGO_PASSWORD = os.getenv('OPENSHIFT_NOSQL_DB_PASSWORD')
+MONGO_USERNAME = os.getenv('OPENSHIFT_MONGODB_DB_USERNAME')
+MONGO_PASSWORD = os.getenv('OPENSHIFT_MONGODB_DB_PASSWORD')
 
 FUNDING_PROMPT = '<strong>Please visit <a href="https://fedorahosted.org/fudcon-planning/wiki/FundingRequest">the FUDCon ticket tracker</a> to make a funding request</strong>'
