@@ -30,6 +30,18 @@
     <p>If you would prefer vegan or vegetarian fare for any meals we provide during the event, we will do our best to make sure everyone is accommodated.</p>
   </div>
   <fieldset>
+    {{ render_field(form.volunteer) }}
+  </fieldset>
+  <div class="help">
+    <p>If you wish to volunteer to help with the conference, select <strong>Yes</strong> here.</p>
+  </div>
+  <fieldset>
+    {{ render_field(form.family) }}
+  </fieldset>
+  <div class="help">
+    <p>If you plan to bring family (spouse, kids, etc), select <strong>Yes</strong> here.</p>
+  </div>
+  <fieldset>
     {{ render_field(form.roomshare) }}
     {{ render_field(form.roommate) }}
   </fieldset>
