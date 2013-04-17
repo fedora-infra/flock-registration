@@ -1,4 +1,5 @@
 wsgi/config.py
+*.egg-info
 .project
 *.pyc
 *.pyo
