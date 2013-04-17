@@ -10,7 +10,7 @@ FUDCON_YEAR = "2013"
 FUDCON_URL = "http://fedoraproject.org/wiki/FUDCon:Lawrence_2013"
 
 # These settings are all pretty good defaults when running on OpenShift.
-LOGFILE = os.path.join(os.getenv('OPENSHIFT_LOG_DIR'), 'flask_log')
+LOGFILE = os.path.join(os.getenv('OPENSHIFT_PYTHON_LOG_DIR'), 'flask_log')
 OPENID_STORE = os.path.join(os.getenv('OPENSHIFT_DATA_DIR'), 'openid_store')
 
 MONGO_HOST = os.getenv('OPENSHIFT_MONGODB_DB_HOST')
