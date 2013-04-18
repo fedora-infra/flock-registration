@@ -18,7 +18,8 @@
     <p>If you include a FAS username, the QR code on your badge will contain your Fedora Project email and a URL to your wiki page.</p>
   </div>
   <fieldset>
-    {{ render_field(form.funding) }}
+    {{ render_field(form.flight_funding) }}
+    {{ render_field(form.hotel_funding) }}
   </fieldset>
   <div class="help">
     <p>Check this box if you need funding to attend. <strong>You will be prompted to visit <a href="https://fedorahosted.org/fudcon-planning/wiki/FundingRequest">the FUDCon ticket tracker</a> to make a funding request.</strong> We have a limited budget and will work hard to fund as many people as possible. We'll use these answers to help figure out budgeting for the event. We are making arrangements for attendees from other geographic regions to encourage specific initiatives such as future FUDCon events, but <strong>preference may otherwise be given to people in North America</strong>.</p>

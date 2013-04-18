@@ -52,7 +52,8 @@ class RegistrationForm(wtf.Form):
     firstname = wtf.TextField('First name', [wtf.validators.Required()])
     lastname = wtf.TextField('Last name')
     fasusername = wtf.TextField('FAS username')
-    funding = wtf.BooleanField('Need funding?')
+    hotel_funding = wtf.BooleanField('Need hotel funding?')
+    flight_funding = wtf.BooleanField('Need flight funding?')
     family = wtf.BooleanField('Bringing family?')
     volunteer = wtf.BooleanField('Willing to be a volunteer?')
     veg = wtf.SelectField('Vegan or vegetarian?', choices=choicer([
