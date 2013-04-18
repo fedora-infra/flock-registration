@@ -122,8 +122,8 @@ def new():
         registration['created'] = datetime.utcnow()
         registration['modified'] = registration['created']
         mongo.db.registrations.insert(registration)
-        if registration['funding']:
-            flask.flash(flask.Markup(app.config['FUNDING_PROMPT']))
+        #if registration['hotel_funding']:
+        #    flask.flash(flask.Markup(app.config['FUNDING_PROMPT']))
         return flask.redirect(flask.url_for('index'))
     if 'id.fedoraproject.org' in flask.g.user:
         try:
@@ -249,13 +249,13 @@ def edit_one(id):
     registration = Bunch(registration)
     form = RegistrationForm(obj=registration)
     if form.validate_on_submit():
-        oldfunding = registration.funding
+        #oldfunding = registration.funding
         form.populate_obj(registration)
         registration['modified'] = datetime.utcnow()
         mongo.db.registrations.save(registration.toDict())
         flask.flash('Registration updated')
-        if not oldfunding and registration.funding:
-            flask.flash(flask.Markup(app.config['FUNDING_PROMPT']))
+        #if not oldfunding and registration.funding:
+            #flask.flash(flask.Markup(app.config['FUNDING_PROMPT']))
         return flask.redirect(flask.url_for('index'))
     return flask.render_template('registration.html', form=form,
                                  submit_text="Edit registration",
