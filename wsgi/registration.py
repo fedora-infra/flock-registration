@@ -146,6 +146,7 @@ def submit_proposal():
     form = PresentationProposalForm()
     if form.validate_on_submit():
         proposal = form.data
+        print(proposal)
         proposal['_id'] = generate_proposal_uuid()
         proposal['openid'] = flask.g.user
         proposal['created'] = datetime.utcnow()
