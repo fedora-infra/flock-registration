@@ -154,6 +154,63 @@ def submit_proposal():
                                  submit_text="Submit proposal")
 
 
+@app.route('/edit_proposal')
+def edit_proposal():
+    if flask.g.user is None:
+        return flask.redirect(flask.url_for('login'))
+    proposals = mongo.db.proposals.find({'openid': flask.g.user},
+                                        sort=[('created', 1)])
+    if proposals.count(True) == 0:
+        return flask.render_template('no_proposals.html')
+    if proposals.count(True) == 1:
+        return flask.redirect(flask.url_for('edit_one_proposal',
+                                            id=proposals[0]['_id']))
+    return flask.render_template('edit_proposals_list.html', proposals=proposals)
+
+
+@app.route('/edit_proposal/<id>', methods=['GET', 'POST'])
+def edit_one_proposal(id):
+    if flask.g.user is None:
+        return flask.redirect(flask.url_for('index'))
+    proposal = mongo.db.proposals.find_one({
+        '_id': id,
+        'openid': flask.g.user
+    })
+    if not proposal:
+        return flask.redirect(flask.url_for('index'))
+    proposal = Bunch(proposal)
+    form = PresentationProposalForm(obj=proposal)
+    if form.validate_on_submit():
+        form.populate_obj(proposal)
+        proposal['modified'] = datetime.utcnow()
+        mongo.db.proposals.save(proposal.toDict())
+        flask.flash('Proposal updated')
+        return flask.redirect(flask.url_for('index'))
+    return flask.render_template('proposal.html', form=form,
+                                 submit_text="Edit proposal",
+                                 delete_text="Delete proposal",
+                                 uuid=id)
+
+
+@app.route('/delete_proposal/<id>', methods=['GET', 'POST'])
+def delete_one_proposal(id):
+    if flask.g.user is None:
+        return flask.redirect(flask.url_for('index'))
+    proposal = mongo.db.proposals.find_one({
+        '_id': id,
+        'openid': flask.g.user
+    })
+    if not proposal:
+        return flask.redirect(flask.url_for('index'))
+    form = ConfirmationForm()
+    if form.validate_on_submit():
+        if form.confirmbox.data:
+            mongo.db.proposals.remove({'_id': id, 'openid': flask.g.user})
+            flask.flash('Proposal deleted')
+        else:
+            flask.flash('Proposal not deleted')
+        return flask.redirect(flask.url_for('index'))
+    return flask.render_template('delete_confirm.html', form=form)
 
 
 @app.route('/edit')
