@@ -86,7 +86,11 @@ class ConfirmationForm(wtf.Form):
 class PresentationProposalForm(wtf.Form):
     fasusername = wtf.TextField('FAS username')
     title = wtf.TextField('Presentation title', [wtf.validators.Required()])
-    category = wtf.TextField('Category', [wtf.validators.Required()])
+    category = wtf.SelectField('Category', choices=choicer([
+        'Ambassadors', 'ARM', 'Cloud', 'Community', 'Design', 'Desktop',
+        'Fonts', 'Games', 'Hardware', 'Infrastructure', 'Marketing', 'QA',
+        'Security', 'SIG', 'Other',
+    ]))
     abstract = wtf.TextAreaField('Presentation abstract', [wtf.validators.Required()])
 
 
