@@ -18,6 +18,12 @@
     <p>If you include a FAS username, the QR code on your badge will contain your Fedora Project email and a URL to your wiki page.</p>
   </div>
   <fieldset>
+    {{ render_field(form.location) }}
+  </fieldset>
+  <div class="help">
+    <p>Where you are located.</p>
+  </div>
+  <fieldset>
     {{ render_field(form.flight_funding) }}
     {{ render_field(form.hotel_funding) }}
   </fieldset>

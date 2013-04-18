@@ -52,6 +52,7 @@ class RegistrationForm(wtf.Form):
     firstname = wtf.TextField('First name', [wtf.validators.Required()])
     lastname = wtf.TextField('Last name')
     fasusername = wtf.TextField('FAS username')
+    location = wtf.TextField('Location')
     hotel_funding = wtf.BooleanField('Need hotel funding?')
     flight_funding = wtf.BooleanField('Need flight funding?')
     family = wtf.BooleanField('Bringing family?')
