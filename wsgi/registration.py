@@ -152,7 +152,7 @@ def submit_proposal():
         proposal['modified'] = proposal['created']
         mongo.db.proposals.insert(proposal)
         flask.flash('Proposal submitted')
-        return flask.redirect(flask.url_for('index'))
+        return flask.redirect(flask.url_for('proposals'))
     if 'id.fedoraproject.org' in flask.g.user:
         try:
             form.fasusername.data = flask.g.user.split('//')[1].split('.')[0]
@@ -193,7 +193,7 @@ def edit_one_proposal(id):
         proposal['modified'] = datetime.utcnow()
         mongo.db.proposals.save(proposal.toDict())
         flask.flash('Proposal updated')
-        return flask.redirect(flask.url_for('index'))
+        return flask.redirect(flask.url_for('proposals'))
     return flask.render_template('proposal.html', form=form,
                                  submit_text="Edit proposal",
                                  delete_text="Delete proposal",
@@ -217,7 +217,7 @@ def delete_one_proposal(id):
             flask.flash('Proposal deleted')
         else:
             flask.flash('Proposal not deleted')
-        return flask.redirect(flask.url_for('index'))
+        return flask.redirect(flask.url_for('proposals'))
     return flask.render_template('delete_confirm.html', form=form)
 
 
