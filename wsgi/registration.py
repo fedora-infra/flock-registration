@@ -151,6 +151,7 @@ def submit_proposal():
         proposal['created'] = datetime.utcnow()
         proposal['modified'] = proposal['created']
         mongo.db.proposals.insert(proposal)
+        flask.flash('Proposal submitted')
         return flask.redirect(flask.url_for('index'))
     if 'id.fedoraproject.org' in flask.g.user:
         try:
