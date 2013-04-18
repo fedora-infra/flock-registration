@@ -34,6 +34,15 @@ def generate_uuid():
             return the_uuid
 
 
+def generate_proposal_uuid():
+    while True:
+        the_uuid = str(uuid.uuid4())
+        if not mongo.db.proposals.find_one({'_id': the_uuid}):
+            return the_uuid
+
+
+
+
 # Forms
 def choicer(choices):
     return [(x, x) for x in choices]
@@ -70,6 +79,12 @@ class RegistrationForm(wtf.Form):
 
 class ConfirmationForm(wtf.Form):
     confirmbox = wtf.BooleanField('Yes, delete this')
+
+
+class PresentationProposalForm(wtf.Form):
+    title = wtf.TextField('Presentation title', [wtf.validators.Required()])
+    category = wtf.TextField('Category', [wtf.validators.Required()])
+    abstract = wtf.TextAreaField('Presentation abstract', [wtf.validators.Required()])
 
 
 # Requests
@@ -115,6 +130,30 @@ def new():
             pass
     return flask.render_template('registration.html', form=form,
                                  submit_text="Submit registration")
+
+
+@app.route('/submit_proposal', methods=['GET', 'POST'])
+def submit_proposal():
+    if flask.g.user is None:
+        return flask.redirect(flask.url_for('login'))
+    form = PresentationProposalForm()
+    if form.validate_on_submit():
+        proposal = form.data
+        proposal['_id'] = generate_proposal_uuid()
+        proposal['openid'] = flask.g.user
+        proposal['created'] = datetime.utcnow()
+        proposal['modified'] = proposal['created']
+        mongo.db.proposals.insert(proposal)
+        return flask.redirect(flask.url_for('index'))
+    if 'id.fedoraproject.org' in flask.g.user:
+        try:
+            form.fasusername.data = flask.g.user.split('//')[1].split('.')[0]
+        except:
+            pass
+    return flask.render_template('proposal.html', form=form,
+                                 submit_text="Submit proposal")
+
+
 
 
 @app.route('/edit')
