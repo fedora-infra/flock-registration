@@ -16,7 +16,7 @@
   {% for proposal in proposals %}
   <tr>
     <td>{{ loop.index }}</td>
-    <td>{% if proposal.openid %}<a href="http://fedoraproject.org/wiki/User:{{ proposal.openid|e }}">{% endif %}{% if proposal.openid %}</a>{% endif %}</td>
+    <td>{% if proposal.fasusername %}<a href="http://fedoraproject.org/wiki/User:{{ proposal.fasusername|e }}">{% endif %}{% if proposal.fasusername %}</a>{% endif %}</td>
     <td>{{ proposal.title|e }}</td>
     <td>{{ proposal.abstract|e }}</td>
   </tr>
