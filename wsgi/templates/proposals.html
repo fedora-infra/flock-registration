@@ -14,6 +14,7 @@
     <th>Name</th>
     <th>Title</th>
     <th>Abstract</th>
+    <th>Category</th>
   </tr>
   {% for proposal in proposals %}
   <tr>
@@ -21,6 +22,7 @@
     <td>{% if proposal.fasusername %}<a href="http://fedoraproject.org/wiki/User:{{ proposal.fasusername|e }}">{{ proposal.fasusername|e }}</a>{% endif %}</td>
     <td>{{ proposal.title|e }}</td>
     <td>{{ proposal.abstract|e }}</td>
+    <td>{{ proposal.category|e }}</td>
   </tr>
   {% endfor %}
 </table>
