@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block title %}Presentation Proposals{% endblock %}
+{% block body %}
+
+<p>Planning to attend <a href="{{ config.FUDCON_URL }}">{{ config.FUDCON_NAME}} {{ config.FUDCON_YEAR }}</a>? <strong><a href="/new">Pre-register now</a></strong> or <strong><a href="/edit">edit your proposal</a></strong>, or <a href="/submit_proposal">submit a presentation proposal</a>. (Tip: you can register multiple people with one login)</p>
+
+<h2>Presentation Proposals</h2>
+
+<table>
+  <tr>
+    <th>#</th>
+    <th>Name</th>
+    <th>Title</th>
+    <th>Abstract</th>
+  </tr>
+  {% for proposal in proposals %}
+  <tr>
+    <td>{{ loop.index }}</td>
+    <td>{% if proposal.openid %}<a href="http://fedoraproject.org/wiki/User:{{ proposal.openid|e }}">{% endif %}{% if proposal.openid %}</a>{% endif %}</td>
+    <td>{{ proposal.title|e }}</td>
+    <td>{{ proposal.abstract|e }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock %}
+{# vim: set ts=2 sw=2 sta et: #}

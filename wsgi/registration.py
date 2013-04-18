@@ -132,6 +132,12 @@ def new():
                                  submit_text="Submit registration")
 
 
+@app.route('/proposals')
+def proposals():
+    proposals = mongo.db.proposals.find(sort=[('created', 1)])
+    return flask.render_template('proposals.html', proposals=proposals)
+
+
 @app.route('/submit_proposal', methods=['GET', 'POST'])
 def submit_proposal():
     if flask.g.user is None:
