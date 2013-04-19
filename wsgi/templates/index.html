@@ -21,6 +21,8 @@
     <th><abbr title="T-shirt size">Size</abbr></th>
     <th>Roomshare?</th>
     <th>Hotel booked?</th>
+    <th>Blog</th>
+    <th>Twitter</th>
     <th>Comments</th>
     <th>Extra line on badge</th>
   </tr>
@@ -37,6 +39,8 @@
     <td>{{ registration.size|e }}</td>
     <td>{% if registration.roomshare == "Found roommate" %}{{ registration.roommate|e }}{% else %}{{ registration.roomshare|e }}{% endif %}</td>
     <td>{{ registration.hotel_booked|e }}</td>
+    <td>{{ registration.blog|e }}</td>
+    <td>{{ registration.twitter|e }}</td>
     <td>{{ registration.comments|e }}</td>
     <td>{{ registration.badge_line|e }}</td>
   </tr>

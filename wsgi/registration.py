@@ -70,6 +70,8 @@ class RegistrationForm(wtf.Form):
     hotel_booked = wtf.SelectField('Hotel booked?', choices=choicer([
         'No', 'Yes', 'No hotel'
     ]))
+    blog = wtf.TextField('Blog')
+    twitter = wtf.TextField('Twitter')
     comments = wtf.TextField('Comments')
     badge_line = wtf.TextField('Extra line on badge')
 
