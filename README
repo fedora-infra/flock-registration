@@ -5,3 +5,11 @@ based on the Flask example from OpenShift on GitHub:
 Set up an OpenShift application with the wsgi and mongodb cartridges. You will
 want to move wsgi/config_default.py to wsgi/config.py, then change SECRET_KEY
 and FUDCON_*. Then the application should Just Work(tm).
+
+Exporting the registrations as JSON
+
+    mongoexport --host $OPENSHIFT_MONGODB_DB_HOST --port $OPENSHIFT_MONGODB_DB_PORT --username $OPENSHIFT_MONGODB_DB_USERNAME --password $OPENSHIFT_MONGODB_DB_PASSWORD --db flock --collection registrations --out /tmp/flock-registrations.json
+
+Exporting the presentation proposals as JSON
+
+    mongoexport --host $OPENSHIFT_MONGODB_DB_HOST --port $OPENSHIFT_MONGODB_DB_PORT --username $OPENSHIFT_MONGODB_DB_USERNAME --password $OPENSHIFT_MONGODB_DB_PASSWORD --db flock --collection proposals --out /tmp/flock-proposals.json
