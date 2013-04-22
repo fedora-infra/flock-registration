@@ -14,6 +14,7 @@
     <th>Title</th>
     <th>Abstract</th>
     <th>Category</th>
+    <th>Type</th>
   </tr>
   {% for proposal in proposals %}
   <tr>
@@ -21,6 +22,7 @@
     <td>{{ proposal.title|e }}</td>
     <td>{{ proposal.abstract|e }}</td>
     <td>{{ proposal.category|e }}</td>
+    <td>{{ proposal.type_|e }}</td>
   </tr>
   {% endfor %}
 </table>
