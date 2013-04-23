@@ -72,7 +72,9 @@ class RegistrationForm(wtf.Form):
     location = wtf.TextField('Location')
     hotel_funding = wtf.BooleanField('Need hotel funding?')
     flight_funding = wtf.BooleanField('Need flight funding?')
-    family = wtf.BooleanField('Bringing family?')
+    family = wtf.SelectField('Bringing family?', choices=choicer([
+        'No', '1', '2', '3', '4', '5+'
+    ]))
     volunteer = wtf.BooleanField('Willing to be a volunteer?')
     veg = wtf.SelectField('Vegan or vegetarian?', choices=choicer([
         'No', 'Vegan', 'Vegetarian'
