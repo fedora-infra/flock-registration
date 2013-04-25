@@ -1,4 +1,4 @@
-import csv
+import json
 from pprint import pprint
 import re
 import subprocess
@@ -6,12 +6,12 @@ import subprocess
 RE_GET_WIDTH = re.compile('<svg width="([0-9]*)" height=.*')
 
 def build_barcode_svg(data):
-    if data['fas id']:
-        mecard = ('MECARD:N:%(last name)s,%(first name)s;'
-                  'EMAIL:%(fas id)s@fedoraproject.org;'
-                  'URL:http://fedoraproject.org/wiki/User:%(fas id)s;;') % data
+    if data['fasusername']:
+        mecard = ('MECARD:N:%(lastname)s,%(firstname)s;'
+                  'EMAIL:%(fasusername)s@fedoraproject.org;'
+                  'URL:http://fedoraproject.org/wiki/User:%(fasusername)s;;') % data
     else:
-        mecard = 'MECARD:N:%(last name)s,%(first name)s;;' % data
+        mecard = 'MECARD:N:%(lastname)s,%(firstname)s;;' % data
     command = ['zint', '--directsvg', '-b', '58', '-d', mecard]
     xml = subprocess.Popen(command, stdout=subprocess.PIPE).stdout.read()
     xml_lines = xml.splitlines()
@@ -30,24 +30,21 @@ def xml_filter(string):
 
 if __name__ == '__main__':
     page_template = file('badge-template.svg').read().replace('%;', '%%;')
-
-    csv_file = file('badges.csv')
-    badge_info = csv.DictReader(csv_file)
-
     pages = []
-    i = 0
     this_page = {}
-    for row in badge_info:
+    for i, row in enumerate(file('registrations.json')):
+        row = json.loads(row)
+        pprint(row)
         i += 1
-        this_page['firstname%d' % i] = xml_filter(row['first name'])
-        this_page['lastname%d' % i] = xml_filter(row['last name'])
-        this_page['tagline%d' % i] = xml_filter(row['comment'])
-        if row['veg code'] and row['shirt size']:
-            grayinfo = '%s / %s' % (row['shirt size'], row['veg code'])
-        elif row['shirt size']:
-            grayinfo = row['shirt size']
-        elif row['veg code']:
-            grayinfo = row['veg code']
+        this_page['firstname%d' % i] = xml_filter(row['firstname'])
+        this_page['lastname%d' % i] = xml_filter(row['lastname'])
+        this_page['tagline%d' % i] = xml_filter(row['comments'])
+        if row['veg'] and row['size']:
+            grayinfo = '%s / %s' % (row['size'], row['veg'])
+        elif row['size']:
+            grayinfo = row['size']
+        elif row['code']:
+            grayinfo = row['code']
         else:
             grayinfo = ''
         this_page['grayinfo%d' % i] = xml_filter(grayinfo)
