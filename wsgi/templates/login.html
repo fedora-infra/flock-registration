@@ -7,9 +7,8 @@
 <div style="float:left;width:48%;padding-right:2%">
   <h2>Fedora Accounts System login</h2>
   <form action="" method="post">
-    Username:
-    <input type="text" name="fasuname" size="16" class="fas">
-    <input type="submit" value="Sign in">
+    <input type="hidden" name="fas" value="true">
+    <input type="submit" value="Sign in with Fedora Account">
     <input type="hidden" name="next" value="{{ next }}">
   </form>
 </div>

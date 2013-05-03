@@ -320,9 +320,9 @@ def login():
     if flask.g.user is not None:
         return flask.redirect(oid.get_next_url())
     if flask.request.method == 'POST':
-        fasusername = flask.request.form.get('fasuname')
+        fasusername = flask.request.form.get('fas')
         if fasusername:
-            return oid.try_login('http://%s.id.fedoraproject.org/' % fasusername)
+            return oid.try_login('https://id.fedoraproject.org/')
         openid = flask.request.form.get('openid')
         if openid:
             return oid.try_login(openid)
