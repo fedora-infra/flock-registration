@@ -24,6 +24,7 @@ import flask.ext.wtf as wtf
 import logging
 from pprint import pformat
 import uuid
+import os
 
 app = flask.Flask(__name__)
 app.config.from_pyfile('config.py')
