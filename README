@@ -21,3 +21,7 @@ Exporting the registrations as JSON
 Exporting the presentation proposals as JSON
 
     mongoexport --host $OPENSHIFT_MONGODB_DB_HOST --port $OPENSHIFT_MONGODB_DB_PORT --username $OPENSHIFT_MONGODB_DB_USERNAME --password $OPENSHIFT_MONGODB_DB_PASSWORD --db flock --collection proposals --out /tmp/flock-proposals.json
+
+Dropping the database
+
+    mongo --host $OPENSHIFT_MONGODB_DB_HOST --port $OPENSHIFT_MONGODB_DB_PORT -u $OPENSHIFT_MONGODB_DB_USERNAME -p $OPENSHIFT_MONGODB_DB_PASSWORD --eval "db.dropDatabase();" flock
