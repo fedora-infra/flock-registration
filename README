@@ -6,6 +6,14 @@ Set up an OpenShift application with the wsgi and mongodb cartridges. You will
 want to move wsgi/config_default.py to wsgi/config.py, then change SECRET_KEY
 and FUDCON_*. Then the application should Just Work(tm).
 
+Creating the app
+
+    rhc app create -a flock -t python-2.6
+
+Adding a mongodb cartridge
+
+    rhc cartridge add --app flock mongodb-2.2
+
 Exporting the registrations as JSON
 
     mongoexport --host $OPENSHIFT_MONGODB_DB_HOST --port $OPENSHIFT_MONGODB_DB_PORT --username $OPENSHIFT_MONGODB_DB_USERNAME --password $OPENSHIFT_MONGODB_DB_PASSWORD --db flock --collection registrations --out /tmp/flock-registrations.json
