@@ -35,7 +35,7 @@
     <td>{% if registration.hotel_funding %}Yes{% else %}No{% endif %}</td>
     <td>{{ registration.veg|e }}</td>
     <td>{% if registration.volunteer%}Yes{% else %}No{% endif %}</td>
-    <td>{% if registration.family%}Yes{% else %}No{% endif %}</td>
+    <td>{% if registration.family != "No" %}Yes{% else %}No{% endif %}</td>
     <td>{{ registration.size|e }}</td>
     <td>{% if registration.roomshare == "Found roommate" %}{{ registration.roommate|e }}{% else %}{{ registration.roomshare|e }}{% endif %}</td>
     <td>{{ registration.hotel_booked|e }}</td>
