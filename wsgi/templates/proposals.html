@@ -18,7 +18,7 @@
   </tr>
   {% for proposal in proposals %}
   <tr>
-    <td>{{ loop.index }}</td>
+    <td><a name="{{ loop.index }}">{{ loop.index }}</a></td>
     <td>{{ proposal.title|e }}</td>
     <td>{{ proposal.abstract|e }}</td>
     <td>{{ proposal.category|e }}</td>
