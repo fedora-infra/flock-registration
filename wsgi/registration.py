@@ -110,8 +110,8 @@ class PresentationProposalForm(wtf.Form):
     title = wtf.TextField('Presentation title', [wtf.validators.Required()])
     category = wtf.SelectField('Category', choices=choicer([
         'Ambassadors', 'ARM', 'Cloud', 'Community', 'Design', 'Desktop',
-        'Fonts', 'Games', 'Hardware', 'Infrastructure', 'Marketing', 'QA',
-        'Security', 'SIG', 'Other',
+        'Fonts', 'Games', 'Hardware', 'Infrastructure', 'Kernel', 'Marketing',
+        'QA', 'Security', 'SIG', 'Other',
     ]))
     type_ = wtf.SelectField('Type', choices=choicer([
         'Talk (45 min)', 'Hackfest (2 hours)', 'Workshop (2 hours)',
