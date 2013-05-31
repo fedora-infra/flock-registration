@@ -4,6 +4,10 @@ import os.path
 # XXX Fill this with something random. This is important!
 SESSION_SECRET_KEY = ''
 
+# Disable proposal submissions after a given UTC datetime
+from datetime import datetime
+SUBMISSION_DEADLINE = datetime(2013, 6, 1, 4)
+
 FUDCON_NAME = "FUDCon Lawrence"
 FUDCON_DATES = "January 18-20"
 FUDCON_YEAR = "2013"

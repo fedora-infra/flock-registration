@@ -173,6 +173,9 @@ def proposals():
 
 @app.route('/submit_proposal', methods=['GET', 'POST'])
 def submit_proposal():
+    if datetime.utcnow() >= app.config['SUBMISSION_DEADLINE']:
+        flask.flash('The presentation submission period has closed')
+        return flask.redirect(flask.url_for('proposals'))
     if flask.g.user is None:
         return flask.redirect(flask.url_for('login'))
     form = PresentationProposalForm()
