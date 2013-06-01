@@ -9,7 +9,9 @@ proposals = []
 with file('proposals.json') as f:
     for i, row in enumerate(f):
         row = json.loads(row)
-        assert '!' not in row['title'], 'Title contains "!"'
+        if '!' in row['title']:
+            row['title'] = row['title'].replace('!', u'\u203C')
+        assert '!' not in row['title'], 'Title contains "!": %r' % row['title']
         assert '|' not in row['title'], 'Title contains "|"'
         url = baseurl + '/proposals#%d' % (i + 1)
         proposals.append('%s!%s' % (row['title'], url))
