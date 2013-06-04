@@ -4,7 +4,14 @@
 
 <p>Planning to attend <a href="{{ config.FUDCON_URL }}">{{ config.FUDCON_NAME}} {{ config.FUDCON_YEAR }}</a>? <strong><a href="/new">Pre-register now</a></strong> or <strong><a href="/edit">edit your registration</a></strong> (Tip: you can register multiple people with one login)</p>
 
+{% if now < config.SUBMISSION_DEADLINE %}
 <p>Want to give a presentation? <strong><a href="/submit_proposal">submit a proposal</a></strong> or <strong><a href="/edit_proposal">edit an existing proposal</a></strong>.</p>
+{% else %}
+<p>The presentation submission period has closed. You can still <strong><a href="/edit_proposal">edit your existing proposal</a></strong>.</p>
+{% if now < config.VOTING_DEADLINE %}
+<p>Vote for your favorite proposals <strong><a href="{{ config.VOTING_URL }}">here!</a></strong> The voting period ends on {{ config.VOTING_DEADLINE }} UTC.</p>
+{% endif %}
+{% endif %}
 
 <h2>Presentation Proposals</h2>
 

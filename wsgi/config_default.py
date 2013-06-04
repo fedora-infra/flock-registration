@@ -8,6 +8,9 @@ SESSION_SECRET_KEY = ''
 from datetime import datetime
 SUBMISSION_DEADLINE = datetime(2013, 6, 1, 4)
 
+VOTING_URL = 'https://admin.fedoraproject.org/voting/about/flock-2013'
+VOTING_DEADLINE = datetime(2013, 6, 10, 4)
+
 FUDCON_NAME = "FUDCon Lawrence"
 FUDCON_DATES = "January 18-20"
 FUDCON_YEAR = "2013"

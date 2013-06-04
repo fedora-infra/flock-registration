@@ -131,7 +131,8 @@ def lookup_current_user():
 @app.route('/')
 def index():
     registrations = mongo.db.registrations.find(sort=[('created', 1)])
-    return flask.render_template('index.html', registrations=registrations)
+    return flask.render_template('index.html', registrations=registrations,
+                                 now=datetime.now())
 
 
 @app.route('/favicon.ico')
@@ -168,7 +169,8 @@ def new():
 @app.route('/proposals')
 def proposals():
     proposals = mongo.db.proposals.find(sort=[('created', 1)])
-    return flask.render_template('proposals.html', proposals=proposals)
+    return flask.render_template('proposals.html', proposals=proposals,
+                                 now=datetime.utcnow())
 
 
 @app.route('/submit_proposal', methods=['GET', 'POST'])
