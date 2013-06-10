@@ -10,6 +10,8 @@
 <p>The presentation submission period has closed. You can still <strong><a href="/edit_proposal">edit your existing proposal</a></strong>.</p>
 {% if now < config.VOTING_DEADLINE %}
 <p>Vote for your favorite proposals <strong><a href="{{ config.VOTING_URL }}">here!</a></strong> The voting period ends on {{ config.VOTING_DEADLINE }} UTC.</p>
+{% else %}
+<p>The proposal voting period ended on {{ config.VOTING_DEADLINE }} UTC. You view the results <strong><a href="{{ config.VOTING_RESULTS }}">here</a></strong></p>
 {% endif %}
 {% endif %}
 

@@ -10,6 +10,7 @@ SUBMISSION_DEADLINE = datetime(2013, 6, 1, 4)
 
 VOTING_URL = 'https://admin.fedoraproject.org/voting/about/flock-2013'
 VOTING_DEADLINE = datetime(2013, 6, 10, 4)
+VOTING_RESULTS = 'https://admin.fedoraproject.org/voting/results/flock-2013'
 
 FUDCON_NAME = "FUDCon Lawrence"
 FUDCON_DATES = "January 18-20"
