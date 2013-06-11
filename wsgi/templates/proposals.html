@@ -11,7 +11,7 @@
 {% if now < config.VOTING_DEADLINE %}
 <p>Vote for your favorite proposals <strong><a href="{{ config.VOTING_URL }}">here!</a></strong> The voting period ends on {{ config.VOTING_DEADLINE }} UTC.</p>
 {% else %}
-<p>The proposal voting period ended on {{ config.VOTING_DEADLINE }} UTC. You view the results <strong><a href="{{ config.VOTING_RESULTS }}">here</a></strong></p>
+<p>The proposal voting period ended on {{ config.VOTING_DEADLINE }} UTC. You can view the results <strong><a href="{{ config.VOTING_RESULTS }}">here</a></strong></p>
 {% endif %}
 {% endif %}
 
