@@ -144,6 +144,9 @@ def favicon():
 
 @app.route('/new', methods=['GET', 'POST'])
 def new():
+    if datetime.utcnow() > app.config['REGISTRATION_DEADLINE']:
+        flask.flash('The registration period has closed')
+        return flask.redirect(flask.url_for('index'))
     if flask.g.user is None:
         return flask.redirect(flask.url_for('login'))
     form = RegistrationForm()

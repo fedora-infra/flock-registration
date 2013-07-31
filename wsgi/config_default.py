@@ -6,6 +6,7 @@ SESSION_SECRET_KEY = ''
 
 # Disable proposal submissions after a given UTC datetime
 from datetime import datetime
+REGISTRATION_DEADLINE = datetime(2013, 7, 29)
 SUBMISSION_DEADLINE = datetime(2013, 6, 1, 4)
 
 VOTING_URL = 'https://admin.fedoraproject.org/voting/about/flock-2013'
