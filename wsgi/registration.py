@@ -114,8 +114,7 @@ class PresentationProposalForm(wtf.Form):
         'QA', 'Security', 'SIG', 'Other',
     ]))
     type_ = wtf.SelectField('Type', choices=choicer([
-        'Talk (45 min)', 'Hackfest (2 hours)', 'Workshop (2 hours)',
-        'Sprint (2 hours)',
+        'Talk (45 min)', 'Workshop (2 hours)',
     ]))
     abstract = wtf.TextAreaField('Presentation abstract', [wtf.validators.Required()])
 
