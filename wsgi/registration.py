@@ -20,7 +20,7 @@ from datetime import datetime
 import flask
 from flask.ext.openid import OpenID
 from flask.ext.pymongo import PyMongo
-import flask.ext.wtf as wtf
+import wtforms as wtf
 import logging
 from pprint import pformat
 import uuid
