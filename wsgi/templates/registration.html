@@ -12,6 +12,12 @@
     <p>Your name will appear as two lines on your conference badge.</p>
   </div>
   <fieldset>
+    {{ render_field(form.email) }}
+  </fieldset>
+  <div class="help">
+    <p>Your email address.</p>
+  </div>
+  <fieldset>
     {{ render_field(form.fasusername) }}
   </fieldset>
   <div class="help">
