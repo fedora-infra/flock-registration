@@ -69,7 +69,7 @@ def choicer(choices):
 class RegistrationForm(wtf.Form):
     firstname = wtf.TextField('First name', [wtf.validators.Required()])
     lastname = wtf.TextField('Last name')
-    email = wtf.TextField('Email address')
+    email = wtf.TextField('Email address', [wtf.validators.Required()])
     fasusername = wtf.TextField('FAS username')
     location = wtf.TextField('Location')
     hotel_funding = wtf.BooleanField('Need hotel funding?')
