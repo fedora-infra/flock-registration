@@ -148,7 +148,7 @@ def new():
         return flask.redirect(flask.url_for('index'))
     if flask.g.user is None:
         return flask.redirect(flask.url_for('login'))
-    form = RegistrationForm()
+    form = RegistrationForm(flask.request.form)
     if form.validate_on_submit():
         registration = form.data
         registration['_id'] = generate_uuid()
@@ -182,7 +182,7 @@ def submit_proposal():
         return flask.redirect(flask.url_for('proposals'))
     if flask.g.user is None:
         return flask.redirect(flask.url_for('login'))
-    form = PresentationProposalForm()
+    form = PresentationProposalForm(flask.request.form)
     if form.validate_on_submit():
         proposal = form.data
         proposal['_id'] = generate_proposal_uuid()
@@ -226,7 +226,7 @@ def edit_one_proposal(id):
     if not proposal:
         return flask.redirect(flask.url_for('index'))
     proposal = Bunch(proposal)
-    form = PresentationProposalForm(obj=proposal)
+    form = PresentationProposalForm(flask.request.form, obj=proposal)
     if form.validate_on_submit():
         form.populate_obj(proposal)
         proposal['modified'] = datetime.utcnow()
@@ -285,7 +285,7 @@ def edit_one(id):
     if not registration:
         return flask.redirect(flask.url_for('index'))
     registration = Bunch(registration)
-    form = RegistrationForm(obj=registration)
+    form = RegistrationForm(flask.request.form, obj=registration)
     if form.validate_on_submit():
         #oldfunding = registration.funding
         form.populate_obj(registration)
