@@ -149,7 +149,7 @@ def new():
     if flask.g.user is None:
         return flask.redirect(flask.url_for('login'))
     form = RegistrationForm(flask.request.form)
-    if form.validate_on_submit():
+    if flask.request.method == 'POST' and form.validate():
         registration = form.data
         registration['_id'] = generate_uuid()
         registration['openid'] = flask.g.user
@@ -183,7 +183,7 @@ def submit_proposal():
     if flask.g.user is None:
         return flask.redirect(flask.url_for('login'))
     form = PresentationProposalForm(flask.request.form)
-    if form.validate_on_submit():
+    if flask.request.method == 'POST' and form.validate():
         proposal = form.data
         proposal['_id'] = generate_proposal_uuid()
         proposal['openid'] = flask.g.user
@@ -227,7 +227,7 @@ def edit_one_proposal(id):
         return flask.redirect(flask.url_for('index'))
     proposal = Bunch(proposal)
     form = PresentationProposalForm(flask.request.form, obj=proposal)
-    if form.validate_on_submit():
+    if flask.request.method == 'POST' and form.validate():
         form.populate_obj(proposal)
         proposal['modified'] = datetime.utcnow()
         mongo.db.proposals.save(proposal.toDict())
@@ -250,7 +250,7 @@ def delete_one_proposal(id):
     if not proposal:
         return flask.redirect(flask.url_for('index'))
     form = ConfirmationForm()
-    if form.validate_on_submit():
+    if flask.request.method == 'POST' and form.validate():
         if form.confirmbox.data:
             mongo.db.proposals.remove({'_id': id, 'openid': flask.g.user})
             flask.flash('Proposal deleted')
@@ -286,7 +286,7 @@ def edit_one(id):
         return flask.redirect(flask.url_for('index'))
     registration = Bunch(registration)
     form = RegistrationForm(flask.request.form, obj=registration)
-    if form.validate_on_submit():
+    if flask.request.method == 'POST' and form.validate():
         #oldfunding = registration.funding
         form.populate_obj(registration)
         registration['modified'] = datetime.utcnow()
@@ -312,7 +312,7 @@ def delete_one(id):
     if not registration:
         return flask.redirect(flask.url_for('index'))
     form = ConfirmationForm()
-    if form.validate_on_submit():
+    if flask.request.method == 'POST' and form.validate():
         if form.confirmbox.data:
             mongo.db.registrations.remove({'_id': id, 'openid': flask.g.user})
             flask.flash('Registration deleted')
