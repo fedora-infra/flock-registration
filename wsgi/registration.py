@@ -74,6 +74,19 @@ class RegistrationForm(wtf.Form):
     invitation_letter = wtf.BooleanField('Do you need an invitation letter to attend Flock?')
     hotel_funding = wtf.BooleanField('Need hotel funding?')
     flight_funding = wtf.BooleanField('Need flight funding?')
+
+    month_of_birth = wtf.TextField('Month of Birth')
+    day_of_birth = wtf.TextField('Day of Birth')
+    year_of_birth = wtf.TextField('Year of Birth')
+    mailing_address = wtf.TextAreaField('Mailing Address')
+    phone_number = wtf.TextField('Phone Number')
+    gender = wtf.TextField('Gender')
+    passport_country = wtf.TextField('Passport Country')
+    passport_number = wtf.TextField('Passport Number')
+    departure_airport = wtf.TextField('Preferred Departure Airport')
+    return_airport = wtf.TextField('Preferred Return Airport')
+    other_notes = wtf.TextAreaField('Other notes relating to flight subsidy preferences')
+
     family = wtf.SelectField('Bringing family?', choices=choicer([
         'No', '1', '2', '3', '4', '5+'
     ]))
