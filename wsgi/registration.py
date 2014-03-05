@@ -250,7 +250,7 @@ def delete_one_proposal(id):
     })
     if not proposal:
         return flask.redirect(flask.url_for('index'))
-    form = ConfirmationForm()
+    form = ConfirmationForm(flask.request.form)
     if flask.request.method == 'POST' and form.validate():
         if form.confirmbox.data:
             mongo.db.proposals.remove({'_id': id, 'openid': flask.g.user})
@@ -312,7 +312,7 @@ def delete_one(id):
     })
     if not registration:
         return flask.redirect(flask.url_for('index'))
-    form = ConfirmationForm()
+    form = ConfirmationForm(flask.request.form)
     if flask.request.method == 'POST' and form.validate():
         if form.confirmbox.data:
             mongo.db.registrations.remove({'_id': id, 'openid': flask.g.user})
