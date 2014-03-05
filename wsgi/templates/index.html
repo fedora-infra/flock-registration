@@ -22,6 +22,7 @@
     <th>#</th>
     <th>Name</th>
     <th>Location</th>
+    <th><abbr title="Needs invitation letter">Invitation letter</abbr></th>
     <th><abbr title="Needs flight funding">Flight funding</abbr></th>
     <th><abbr title="Needs hotel funding">Hotel funding</abbr></th>
     <th><abbr title="Vegan or vegetarian">Veg</abbr></th>
@@ -40,6 +41,7 @@
     <td>{{ loop.index }}</td>
     <td>{% if registration.fasusername %}<a href="http://fedoraproject.org/wiki/User:{{ registration.fasusername|e }}">{% endif %}{{ registration.firstname|e }} {{ registration.lastname|e }}{% if registration.fasusername %}</a>{% endif %}</td>
     <td>{{ registration.location|e }}</td>
+    <td>{% if registration.invitation_letter %}Yes{% else %}No{% endif %}</td>
     <td>{% if registration.flight_funding %}Yes{% else %}No{% endif %}</td>
     <td>{% if registration.hotel_funding %}Yes{% else %}No{% endif %}</td>
     <td>{{ registration.veg|e }}</td>

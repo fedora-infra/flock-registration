@@ -59,8 +59,6 @@ def generate_proposal_uuid():
             return the_uuid
 
 
-
-
 # Forms
 def choicer(choices):
     return [(x, x) for x in choices]
@@ -72,6 +70,7 @@ class RegistrationForm(wtf.Form):
     email = wtf.TextField('Email address', [wtf.validators.Required()])
     fasusername = wtf.TextField('FAS username')
     location = wtf.TextField('Location')
+    invitation_letter = wtf.BooleanField('Do you need an invitation letter to attend Flock?')
     hotel_funding = wtf.BooleanField('Need hotel funding?')
     flight_funding = wtf.BooleanField('Need flight funding?')
     family = wtf.SelectField('Bringing family?', choices=choicer([

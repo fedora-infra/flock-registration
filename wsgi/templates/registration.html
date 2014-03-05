@@ -30,6 +30,12 @@
     <p>Where you are located.</p>
   </div>
   <fieldset>
+    {{ render_field(form.invitation_letter) }}
+  </fieldset>
+  <div class="help">
+    <p>If you need an invitation letter to attend.</p>
+  </div>
+  <fieldset>
     {{ render_field(form.flight_funding) }}
     {{ render_field(form.hotel_funding) }}
   </fieldset>
