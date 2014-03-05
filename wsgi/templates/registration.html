@@ -3,6 +3,19 @@
 {% block title %}Pre-register{% endblock %}
 {% block body %}
 
+<script src="/static/jquery-1.11.0.min.js"></script>
+<script>
+$(document).ready(function(){
+  $('#flight_funding').change(function() {
+    if ($(this).is(":checked")) {
+      $('#flight_details').show();
+    } else {
+      $('#flight_details').hide();
+    }
+  })
+});
+</script>
+
 <form action="" method="post">
   <fieldset>
     {{ render_field(form.firstname) }}
@@ -42,6 +55,11 @@
   </fieldset>
   <div class="help">
     <p>Check theses boxes if you need funding to attend.</p>
+  </div>
+  <div id="flight_details" style="display:none">
+    <fieldset>
+      {{ render_field(form.flight_details)}}
+    </fieldset>
   </div>
   <fieldset>
     {{ render_field(form.veg) }}
