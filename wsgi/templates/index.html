@@ -39,7 +39,7 @@
   {% for registration in registrations %}
   <tr>
     <td>{{ loop.index }}</td>
-    <td>{% if registration.fasusername %}<a href="http://fedoraproject.org/wiki/User:{{ registration.fasusername|e }}">{% endif %}{{ registration.firstname|e }} {{ registration.lastname|e }}{% if registration.fasusername %}</a>{% endif %}</td>
+    <td>{% if registration.fasusername %}<a href="http://fedoraproject.org/wiki/User:{{ registration.fasusername|e }}">{% endif %}{{ registration.firstname|e }} {{ registration.middlename|e}} {{ registration.lastname|e }}{% if registration.fasusername %}</a>{% endif %}</td>
     <td>{{ registration.location|e }}</td>
     <td>{% if registration.invitation_letter %}Yes{% else %}No{% endif %}</td>
     <td>{% if registration.flight_funding %}Yes{% else %}No{% endif %}</td>
