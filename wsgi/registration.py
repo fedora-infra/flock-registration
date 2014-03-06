@@ -22,7 +22,6 @@ from flask.ext.openid import OpenID
 from flask.ext.pymongo import PyMongo
 import wtforms as wtf
 import logging
-from pprint import pformat
 import uuid
 import os
 
