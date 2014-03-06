@@ -6,13 +6,16 @@
 <script src="/static/jquery-1.11.0.min.js"></script>
 <script>
 $(document).ready(function(){
-  $('#flight_funding').change(function() {
-    if ($(this).is(":checked")) {
+  function toggle_details() {
+    if ($('#flight_funding').is(":checked")) {
       $('#flight_details').show();
     } else {
       $('#flight_details').hide();
     }
-  })
+  }
+
+  $('#flight_funding').change(toggle_details);
+  toggle_details();
 });
 </script>
 
