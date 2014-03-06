@@ -138,6 +138,12 @@ def lookup_current_user():
     flask.g.user = None
     if 'openid' in flask.session:
         flask.g.user = flask.session['openid']
+        flask.g.fasusername = None
+        if 'id.fedoraproject.org' in flask.g.user:
+            try:
+                flask.g.fasusername = flask.g.user.split('//')[1].split('.')[0]
+            except:
+                pass
 
 
 @app.route('/')
@@ -175,11 +181,8 @@ def new():
         #if registration['hotel_funding']:
         #    flask.flash(flask.Markup(app.config['FUNDING_PROMPT']))
         return flask.redirect(flask.url_for('index'))
-    if 'id.fedoraproject.org' in flask.g.user:
-        try:
-            form.fasusername.data = flask.g.user.split('//')[1].split('.')[0]
-        except:
-            pass
+    if flask.g.fasusername:
+        form.fasusername.data = flask.g.fasusername
     return flask.render_template('registration.html', form=form,
                                  submit_text="Submit registration")
 
@@ -208,11 +211,8 @@ def submit_proposal():
         mongo.db.proposals.insert(proposal)
         flask.flash('Proposal submitted')
         return flask.redirect(flask.url_for('proposals'))
-    if 'id.fedoraproject.org' in flask.g.user:
-        try:
-            form.fasusername.data = flask.g.user.split('//')[1].split('.')[0]
-        except:
-            pass
+    if flask.g.fasusername:
+        form.fasusername.data = flask.g.fasusername
     return flask.render_template('proposal.html', form=form,
                                  submit_text="Submit proposal")
 
