@@ -201,6 +201,14 @@ def submit_proposal():
         return flask.redirect(flask.url_for('proposals'))
     if flask.g.user is None:
         return flask.redirect(flask.url_for('login'))
+
+    # Force people to register before submitting proposals
+    registrations = mongo.db.registrations.find({'openid': flask.g.user},
+                                                sort=[('created', 1)])
+    if registrations.count(True) == 0:
+        flask.flash('You must register before you can submit a proposal')
+        return flask.redirect(flask.url_for('new'))
+
     form = PresentationProposalForm(flask.request.form)
     if flask.request.method == 'POST' and form.validate():
         proposal = form.data
