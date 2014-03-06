@@ -24,14 +24,25 @@
     <th>Abstract</th>
     <th>Category</th>
     <th>Type</th>
+    {% if admin %}
+      <th>Action</th>
+    {% endif %}
   </tr>
   {% for proposal in proposals %}
-  <tr>
+    {% if not admin and proposal.rejected %}{{ continue }}{% endif %}
+  <tr class="{{ proposal.rejected and "rejected" or "" }}">
     <td><a name="{{ loop.index }}" href="#{{ loop.index }}">{{ loop.index }}</a></td>
     <td>{{ proposal.title|e }}</td>
     <td>{{ proposal.abstract|e }}</td>
     <td>{{ proposal.category|e }}</td>
     <td>{{ proposal.type_|e }}</td>
+    {% if admin %}
+      {% if proposal.rejected %}
+        <td><a href="/admin/accept/{{ proposal._id }}">Accept</a></td>
+      {% else %}
+        <td><a href="/admin/reject/{{ proposal._id }}">Reject</a></td>
+      {% endif %}
+    {% endif %}
   </tr>
   {% endfor %}
 </table>

@@ -1,6 +1,9 @@
 import os
 import os.path
 
+# FAS usernames of people can that approve/reject proposals
+ADMINS = ('lmacken', 'spot')
+
 # Displayed at the top of the index
 NOTICE = 'This site is currently in TESTING mode. Registrations and proposals may be deleted.'
 

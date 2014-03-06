@@ -190,8 +190,33 @@ def new():
 @app.route('/proposals')
 def proposals():
     proposals = mongo.db.proposals.find(sort=[('created', 1)])
+    admin = False
+    if flask.g.fasusername in app.config['ADMINS']:
+        admin = True
     return flask.render_template('proposals.html', proposals=proposals,
-                                 now=datetime.utcnow())
+                                 now=datetime.utcnow(), admin=admin)
+
+
+@app.route('/admin/<action>/<id>')
+def admin(action, id):
+    """ An admin view to accept/reject proposals """
+    if flask.g.fasusername not in app.config['ADMINS']:
+        flask.abort(401)
+    if action not in ('accept', 'reject'):
+        flask.abort(400)
+    proposal = mongo.db.proposals.find_one({'_id': id})
+    if not proposal:
+        flask.flash('Cannot find proposal %r' % id)
+        return flask.redirect(flask.url_for('proposals'))
+    if action == 'reject':
+        proposal['rejected'] = True
+    else:
+        proposal['rejected'] = False
+    mongo.db.proposals.save(proposal)
+    msg = 'Proposal "%s" %sed' % (proposal['title'], action)
+    flask.flash(msg)
+    app.logger.info(msg)
+    return flask.redirect(flask.url_for('proposals'))
 
 
 @app.route('/submit_proposal', methods=['GET', 'POST'])
@@ -216,6 +241,7 @@ def submit_proposal():
         proposal['openid'] = flask.g.user
         proposal['created'] = datetime.utcnow()
         proposal['modified'] = proposal['created']
+        proposal['rejected'] = False
         mongo.db.proposals.insert(proposal)
         flask.flash('Proposal submitted')
         return flask.redirect(flask.url_for('proposals'))

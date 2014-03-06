@@ -87,6 +87,10 @@ th, td {
 	padding: 0.5ex;
 }
 
+.rejected {
+    background-color: #ff0000;
+}
+
 th {
 	background-color: #ddd;
 }
