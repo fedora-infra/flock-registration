@@ -79,7 +79,7 @@ class RegistrationForm(wtf.Form):
     year_of_birth = wtf.TextField('Year of Birth')
     mailing_address = wtf.TextAreaField('Mailing Address')
     phone_number = wtf.TextField('Phone Number')
-    gender = wtf.TextField('Gender')
+    gender = wtf.SelectField('Gender', choices=choicer(['Male', 'Female']))
     passport_country = wtf.TextField('Passport Country')
     passport_number = wtf.TextField('Passport Number')
     departure_airport = wtf.TextField('Preferred Departure Airport')
