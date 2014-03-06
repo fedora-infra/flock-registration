@@ -56,7 +56,8 @@ $(document).ready(function(){
   <div class="help">
     <p>Check theses boxes if you need funding to attend.</p>
   </div>
-  <div id="flight_details" style="display:none">
+
+  <div id="flight_details">
     <fieldset>
       {{ render_field(form.month_of_birth) }}
       {{ render_field(form.day_of_birth) }}
@@ -71,6 +72,7 @@ $(document).ready(function(){
       {{ render_field(form.other_notes) }}
     </fieldset>
   </div>
+
   <fieldset>
     {{ render_field(form.veg) }}
   </fieldset>

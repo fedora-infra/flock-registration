@@ -91,6 +91,10 @@ th {
 	background-color: #ddd;
 }
 
+#flight_details {
+    display: none;
+}
+
 /* input elements */
 
 fieldset {
