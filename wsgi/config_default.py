@@ -1,6 +1,9 @@
 import os
 import os.path
 
+# Displayed at the top of the index
+NOTICE = 'This site is currently in TESTING mode. Registrations and proposals may be deleted.'
+
 # XXX Fill this with something random. This is important!
 SESSION_SECRET_KEY = ''
 

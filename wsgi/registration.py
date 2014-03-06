@@ -143,6 +143,9 @@ def lookup_current_user():
 
 @app.route('/')
 def index():
+    notice = app.config.get('NOTICE')
+    if notice:
+        flask.flash(notice)
     registrations = mongo.db.registrations.find(sort=[('created', 1)])
     return flask.render_template('index.html', registrations=registrations,
                                  now=datetime.now())
