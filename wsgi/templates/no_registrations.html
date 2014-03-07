@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
-{% block title %}Presentation Proposal{% endblock %}
+{% block title %}{{ _('Presentation Proposal') }}{% endblock %}
 {% block body %}
 
-<p>You have not submitted any presentation proposals. <a href="/submit_proposal">Submit a proposal</a> or <a href="/">go back</a></p>
+{% autoescape false %}
+<p>{{ _('You have not submitted any presentation proposals. <a href="/submit_proposal">Submit a proposal</a> or <a href="/">go back') }}</a></p>
+{% endautoescape %}
 
 {% endblock %}
 {# vim: set ts=2 sw=2 sta et: #}
