@@ -77,13 +77,16 @@ def choicer(choices):
 
 
 class RegistrationForm(wtf.Form):
-    firstname = wtf.TextField(lazy_gettext('First (Given) Name'), [wtf.validators.Required()])
+    firstname = wtf.TextField(lazy_gettext('First (Given) Name'),
+                              [wtf.validators.Required()])
     middlename = wtf.TextField(lazy_gettext('Middle Name'))
     lastname = wtf.TextField(lazy_gettext('Last (Family) Name'))
-    email = wtf.TextField(lazy_gettext('Email address'), [wtf.validators.Required()])
+    email = wtf.TextField(lazy_gettext('Email address'),
+                          [wtf.validators.Required()])
     fasusername = wtf.TextField(lazy_gettext('FAS username'))
     location = wtf.TextField(lazy_gettext('Location'))
-    invitation_letter = wtf.BooleanField(lazy_gettext('Do you need an invitation letter to attend Flock?'))
+    invitation_letter = wtf.BooleanField(
+        lazy_gettext('Do you need an invitation letter to attend Flock?'))
     hotel_funding = wtf.BooleanField(lazy_gettext('Need hotel funding?'))
     flight_funding = wtf.BooleanField(lazy_gettext('Need flight funding?'))
 
@@ -92,30 +95,48 @@ class RegistrationForm(wtf.Form):
     year_of_birth = wtf.TextField(lazy_gettext('Year of Birth'))
     mailing_address = wtf.TextAreaField(lazy_gettext('Mailing Address'))
     phone_number = wtf.TextField(lazy_gettext('Phone Number'))
-    gender = wtf.SelectField(lazy_gettext('Gender'), choices=choicer([lazy_gettext('Male'), lazy_gettext('Female')]))
+    gender = wtf.SelectField(lazy_gettext('Gender'),
+                             choices=choicer([lazy_gettext('Male'),
+                             lazy_gettext('Female')]))
     passport_country = wtf.TextField(lazy_gettext('Passport Country'))
     passport_number = wtf.TextField(lazy_gettext('Passport Number'))
-    departure_airport = wtf.TextField(lazy_gettext('Preferred Departure Airport'))
+    departure_airport = wtf.TextField(
+        lazy_gettext('Preferred Departure Airport'))
     return_airport = wtf.TextField(lazy_gettext('Preferred Return Airport'))
-    other_notes = wtf.TextAreaField(lazy_gettext('Other notes relating to flight subsidy preferences'))
+    other_notes = wtf.TextAreaField(
+        lazy_gettext('Other notes relating to flight subsidy preferences'))
 
-    family = wtf.SelectField(lazy_gettext('Bringing family?'), choices=choicer([
-        lazy_gettext('No'), '1', '2', '3', '4', '5+'
-    ]))
+    family = wtf.SelectField(
+        lazy_gettext('Bringing family?'),
+        choices=choicer([lazy_gettext('No'), '1', '2', '3', '4', '5+']))
+
     volunteer = wtf.BooleanField(lazy_gettext('Willing to be a volunteer?'))
-    veg = wtf.SelectField(lazy_gettext('Vegan or vegetarian?'), choices=choicer([
-        lazy_gettext('No'), lazy_gettext('Vegan'), lazy_gettext('Vegetarian')
-    ]))
-    size = wtf.SelectField(lazy_gettext('T-shirt size'), choices=choicer([
-        lazy_gettext('No shirt'), lazy_gettext('XS'), lazy_gettext('S'), lazy_gettext('M'), lazy_gettext('L'), lazy_gettext('XL'), lazy_gettext('2XL'), lazy_gettext('3XL')
-    ]))
-    roomshare = wtf.SelectField(lazy_gettext('Room share'), choices=choicer([
-        lazy_gettext('No'), lazy_gettext('Yes'), lazy_gettext('Found roommate')
-    ]))
+    veg = wtf.SelectField(
+        lazy_gettext('Vegan or vegetarian?'),
+        choices=choicer([lazy_gettext('No'),
+                         lazy_gettext('Vegan'),
+                         lazy_gettext('Vegetarian')]))
+    size = wtf.SelectField(
+        lazy_gettext('T-shirt size'),
+        choices=choicer([lazy_gettext('No shirt'),
+                         lazy_gettext('XS'),
+                         lazy_gettext('S'),
+                         lazy_gettext('M'),
+                         lazy_gettext('L'),
+                         lazy_gettext('XL'),
+                         lazy_gettext('2XL'),
+                         lazy_gettext('3XL')]))
+    roomshare = wtf.SelectField(
+        lazy_gettext('Room share'),
+        choices=choicer([lazy_gettext('No'),
+                         lazy_gettext('Yes'),
+                         lazy_gettext('Found roommate')]))
     roommate = wtf.TextField('Roommate')
-    hotel_booked = wtf.SelectField(lazy_gettext('Hotel booked?'), choices=choicer([
-        lazy_gettext('No'), lazy_gettext('Yes'), lazy_gettext('No hotel')
-    ]))
+    hotel_booked = wtf.SelectField(
+        lazy_gettext('Hotel booked?'),
+        choices=choicer([lazy_gettext('No'),
+                         lazy_gettext('Yes'),
+                         lazy_gettext('No hotel')]))
     blog = wtf.TextField(lazy_gettext('Blog'))
     twitter = wtf.TextField(lazy_gettext('Twitter'))
     comments = wtf.TextField(lazy_gettext('Comments'))
@@ -133,8 +154,10 @@ class ConfirmationForm(wtf.Form):
 
 class PresentationProposalForm(wtf.Form):
     fasusername = wtf.TextField(lazy_gettext('FAS username'))
-    title = wtf.TextField(lazy_gettext('Presentation title'), [wtf.validators.Required()])
-    # i think that this choices shouldn't be translated.
+    title = wtf.TextField(
+        lazy_gettext('Presentation title'),
+        [wtf.validators.Required()])
+    # I think that this choices shouldn't be translated.
     category = wtf.SelectField(lazy_gettext('Category'), choices=choicer([
         'Ambassadors', 'ARM', 'Cloud', 'Community', 'Design', 'Desktop',
         'Fonts', 'Games', 'Hardware', 'Infrastructure', 'Kernel', 'Marketing',
@@ -143,7 +166,9 @@ class PresentationProposalForm(wtf.Form):
     type_ = wtf.SelectField(lazy_gettext('Type'), choices=choicer([
         lazy_gettext('Talk (45 min)'), lazy_gettext('Workshop (2 hours)'),
     ]))
-    abstract = wtf.TextAreaField(lazy_gettext('Presentation abstract'), [wtf.validators.Required()])
+    abstract = wtf.TextAreaField(
+        lazy_gettext('Presentation abstract'),
+        [wtf.validators.Required()])
 
 
 # Requests
@@ -180,7 +205,7 @@ def favicon():
 @app.route('/new', methods=['GET', 'POST'])
 def new():
     if datetime.utcnow() > app.config['REGISTRATION_DEADLINE']:
-        flask.flash(gettext('The registration period has closed'))
+        flask.flash(gettext(gettext('The registration period has closed')))
         return flask.redirect(flask.url_for('index'))
     if flask.g.user is None:
         return flask.redirect(flask.url_for('login'))
@@ -245,7 +270,8 @@ def submit_proposal():
     registrations = mongo.db.registrations.find({'openid': flask.g.user},
                                                 sort=[('created', 1)])
     if registrations.count(True) == 0:
-        flask.flash('You must register before you can submit a proposal')
+        flask.flash(
+            gettext('You must register before you can submit a proposal'))
         return flask.redirect(flask.url_for('new'))
 
     form = PresentationProposalForm(flask.request.form)
@@ -257,12 +283,12 @@ def submit_proposal():
         proposal['modified'] = proposal['created']
         proposal['rejected'] = False
         mongo.db.proposals.insert(proposal)
-        flask.flash('Proposal submitted')
+        flask.flash(gettext('Proposal submitted'))
         return flask.redirect(flask.url_for('proposals'))
     if flask.g.fasusername:
         form.fasusername.data = flask.g.fasusername
     return flask.render_template('proposal.html', form=form,
-                                 submit_text=gettext("Submit proposal"))
+                                 submit_text=gettext('Submit proposal'))
 
 
 @app.route('/edit_proposal')
@@ -276,7 +302,8 @@ def edit_proposal():
     if proposals.count(True) == 1:
         return flask.redirect(flask.url_for('edit_one_proposal',
                                             id=proposals[0]['_id']))
-    return flask.render_template('edit_proposals_list.html', proposals=proposals)
+    return flask.render_template('edit_proposals_list.html',
+                                 proposals=proposals)
 
 
 @app.route('/edit_proposal/<id>', methods=['GET', 'POST'])
@@ -295,11 +322,11 @@ def edit_one_proposal(id):
         form.populate_obj(proposal)
         proposal['modified'] = datetime.utcnow()
         mongo.db.proposals.save(proposal.toDict())
-        flask.flash('Proposal updated')
+        flask.flash(gettext('Proposal updated'))
         return flask.redirect(flask.url_for('proposals'))
     return flask.render_template('proposal.html', form=form,
-                                 submit_text=gettext("Edit proposal"),
-                                 delete_text=gettext("Delete proposal"),
+                                 submit_text=gettext('Edit proposal'),
+                                 delete_text=gettext('Delete proposal'),
                                  uuid=id)
 
 
@@ -360,8 +387,8 @@ def edit_one(id):
             #flask.flash(flask.Markup(app.config['FUNDING_PROMPT']))
         return flask.redirect(flask.url_for('index'))
     return flask.render_template('registration.html', form=form,
-                                 submit_text=gettext("Edit registration"),
-                                 delete_text=gettext("Delete registration"),
+                                 submit_text=gettext('Edit registration'),
+                                 delete_text=gettext('Delete registration'),
                                  uuid=id)
 
 
