@@ -1,6 +1,12 @@
+# -*- coding: utf-8 -*-
 import os
 import os.path
 
+# Available Languages
+LANGUAGES = {
+    'en': 'English',
+    'es': 'Español'
+}
 # Displayed at the top of the index
 NOTICE = 'This site is currently in TESTING mode. Registrations and proposals may be deleted.'
 
