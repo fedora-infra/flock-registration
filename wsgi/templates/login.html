@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
-{% block title %}Sign in{% endblock %}
+{% block title %}{{ _('Sign in') }}{% endblock %}
 {% block body %}
 
-{% if error %}<p class="error"><strong>Error:</strong> {{ error }}</p>{% endif %}
+{% if error %}<p class="error"><strong>{{ _('Error:') }}</strong> {{ error }}</p>{% endif %}
 
 <div style="float:left;width:48%;padding-right:2%">
-  <h2>Fedora Accounts System login</h2>
+  <h2>{{ _('Fedora Accounts System login') }}</h2>
   <form action="" method="post">
     <input type="hidden" name="fas" value="true">
     <input type="submit" value="Sign in with Fedora Account">
@@ -14,9 +14,9 @@
 </div>
 
 <div style="float:right;width:48%;padding-left:2%">
-  <h2>OpenID login</h2>
+  <h2>{{ _('OpenID login') }}</h2>
   <form action="" method="post">
-    OpenID:
+    {{ _('OpenID:')}}
     <input type="text" name="openid" size="16" class="openid">
     <input type="submit" value="Sign in">
     <input type="hidden" name="next" value="{{ next }}">
@@ -25,8 +25,8 @@
 
 <br style="clear:both">
 
-<p style="margin-top:2em">Please remember the OpenID you register with &mdash; in order to modify or remove your registration, you will need to log in with the same OpenID.</p>
-<p><a href="http://openid.net/get-an-openid/">Don't have an OpenID? Learn more</a></p>
+<p style="margin-top:2em">{{ _('Please remember the OpenID you register with &mdash; in order to modify or remove your registration, you will need to log in with the same OpenID.') }}</p>
+<p><a href="http://openid.net/get-an-openid/">{{ _('Don\'t have an OpenID? Learn more') }}</a></p>
 
 {% endblock %}
 {# vim: set ts=2 sw=2 sta et: #}

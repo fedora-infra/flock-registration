@@ -20,6 +20,11 @@ from datetime import datetime
 import flask
 from flask.ext.openid import OpenID
 from flask.ext.pymongo import PyMongo
+from flask import request
+from flask.ext.babel import Babel
+from flask.ext.babel import gettext, ngettext
+from flask.ext.babel import lazy_gettext
+from config import LANGUAGES
 import wtforms as wtf
 import logging
 import uuid
@@ -27,6 +32,9 @@ import os
 
 app = flask.Flask(__name__)
 app.config.from_pyfile('config.py')
+
+# Set up babel for translations
+babel = Babel(app)
 
 # Set up session secret key
 app.secret_key = app.config['SESSION_SECRET_KEY']
@@ -42,6 +50,11 @@ if not app.debug:
     file_handler = logging.FileHandler(app.config['LOGFILE'])
     file_handler.setLevel(logging.DEBUG)
     app.logger.addHandler(file_handler)
+
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(LANGUAGES.keys())
 
 
 def generate_uuid():
@@ -64,72 +77,73 @@ def choicer(choices):
 
 
 class RegistrationForm(wtf.Form):
-    firstname = wtf.TextField('First (Given) Name', [wtf.validators.Required()])
-    middlename = wtf.TextField('Middle Name')
-    lastname = wtf.TextField('Last (Family) Name')
-    email = wtf.TextField('Email address', [wtf.validators.Required()])
-    fasusername = wtf.TextField('FAS username')
-    location = wtf.TextField('Location')
-    invitation_letter = wtf.BooleanField('Do you need an invitation letter to attend Flock?')
-    hotel_funding = wtf.BooleanField('Need hotel funding?')
-    flight_funding = wtf.BooleanField('Need flight funding?')
+    firstname = wtf.TextField(lazy_gettext('First (Given) Name'), [wtf.validators.Required()])
+    middlename = wtf.TextField(lazy_gettext('Middle Name'))
+    lastname = wtf.TextField(lazy_gettext('Last (Family) Name'))
+    email = wtf.TextField(lazy_gettext('Email address'), [wtf.validators.Required()])
+    fasusername = wtf.TextField(lazy_gettext('FAS username'))
+    location = wtf.TextField(lazy_gettext('Location'))
+    invitation_letter = wtf.BooleanField(lazy_gettext('Do you need an invitation letter to attend Flock?'))
+    hotel_funding = wtf.BooleanField(lazy_gettext('Need hotel funding?'))
+    flight_funding = wtf.BooleanField(lazy_gettext('Need flight funding?'))
 
-    month_of_birth = wtf.TextField('Month of Birth')
-    day_of_birth = wtf.TextField('Day of Birth')
-    year_of_birth = wtf.TextField('Year of Birth')
-    mailing_address = wtf.TextAreaField('Mailing Address')
-    phone_number = wtf.TextField('Phone Number')
-    gender = wtf.SelectField('Gender', choices=choicer(['Male', 'Female']))
-    passport_country = wtf.TextField('Passport Country')
-    passport_number = wtf.TextField('Passport Number')
-    departure_airport = wtf.TextField('Preferred Departure Airport')
-    return_airport = wtf.TextField('Preferred Return Airport')
-    other_notes = wtf.TextAreaField('Other notes relating to flight subsidy preferences')
+    month_of_birth = wtf.TextField(lazy_gettext('Month of Birth'))
+    day_of_birth = wtf.TextField(lazy_gettext('Day of Birth'))
+    year_of_birth = wtf.TextField(lazy_gettext('Year of Birth'))
+    mailing_address = wtf.TextAreaField(lazy_gettext('Mailing Address'))
+    phone_number = wtf.TextField(lazy_gettext('Phone Number'))
+    gender = wtf.SelectField(lazy_gettext('Gender'), choices=choicer([lazy_gettext('Male'), lazy_gettext('Female')]))
+    passport_country = wtf.TextField(lazy_gettext('Passport Country'))
+    passport_number = wtf.TextField(lazy_gettext('Passport Number'))
+    departure_airport = wtf.TextField(lazy_gettext('Preferred Departure Airport'))
+    return_airport = wtf.TextField(lazy_gettext('Preferred Return Airport'))
+    other_notes = wtf.TextAreaField(lazy_gettext('Other notes relating to flight subsidy preferences'))
 
-    family = wtf.SelectField('Bringing family?', choices=choicer([
-        'No', '1', '2', '3', '4', '5+'
+    family = wtf.SelectField(lazy_gettext('Bringing family?'), choices=choicer([
+        lazy_gettext('No'), '1', '2', '3', '4', '5+'
     ]))
-    volunteer = wtf.BooleanField('Willing to be a volunteer?')
-    veg = wtf.SelectField('Vegan or vegetarian?', choices=choicer([
-        'No', 'Vegan', 'Vegetarian'
+    volunteer = wtf.BooleanField(lazy_gettext('Willing to be a volunteer?'))
+    veg = wtf.SelectField(lazy_gettext('Vegan or vegetarian?'), choices=choicer([
+        lazy_gettext('No'), lazy_gettext('Vegan'), lazy_gettext('Vegetarian')
     ]))
-    size = wtf.SelectField('T-shirt size', choices=choicer([
-        'No shirt', 'XS', 'S', 'M', 'L', 'XL', '2XL', '3XL'
+    size = wtf.SelectField(lazy_gettext('T-shirt size'), choices=choicer([
+        lazy_gettext('No shirt'), lazy_gettext('XS'), lazy_gettext('S'), lazy_gettext('M'), lazy_gettext('L'), lazy_gettext('XL'), lazy_gettext('2XL'), lazy_gettext('3XL')
     ]))
-    roomshare = wtf.SelectField('Room share', choices=choicer([
-        'No', 'Yes', 'Found roommate'
+    roomshare = wtf.SelectField(lazy_gettext('Room share'), choices=choicer([
+        lazy_gettext('No'), lazy_gettext('Yes'), lazy_gettext('Found roommate')
     ]))
     roommate = wtf.TextField('Roommate')
-    hotel_booked = wtf.SelectField('Hotel booked?', choices=choicer([
-        'No', 'Yes', 'No hotel'
+    hotel_booked = wtf.SelectField(lazy_gettext('Hotel booked?'), choices=choicer([
+        lazy_gettext('No'), lazy_gettext('Yes'), lazy_gettext('No hotel')
     ]))
-    blog = wtf.TextField('Blog')
-    twitter = wtf.TextField('Twitter')
-    comments = wtf.TextField('Comments')
-    badge_line = wtf.TextField('Extra line on badge')
+    blog = wtf.TextField(lazy_gettext('Blog'))
+    twitter = wtf.TextField(lazy_gettext('Twitter'))
+    comments = wtf.TextField(lazy_gettext('Comments'))
+    badge_line = wtf.TextField(lazy_gettext('Extra line on badge'))
 
     def validate_roommate(form, field):
         if form.roomshare.data == 'Found roommate' and not form.roommate.data:
-            raise wtf.ValidationError('This field is required if '
-                                      '"Found roommate" is selected.')
+            raise wtf.ValidationError(lazy_gettext('This field is required if '
+                                      '"Found roommate" is selected.'))
 
 
 class ConfirmationForm(wtf.Form):
-    confirmbox = wtf.BooleanField('Yes, delete this')
+    confirmbox = wtf.BooleanField(lazy_gettext('Yes, delete this'))
 
 
 class PresentationProposalForm(wtf.Form):
-    fasusername = wtf.TextField('FAS username')
-    title = wtf.TextField('Presentation title', [wtf.validators.Required()])
-    category = wtf.SelectField('Category', choices=choicer([
+    fasusername = wtf.TextField(lazy_gettext('FAS username'))
+    title = wtf.TextField(lazy_gettext('Presentation title'), [wtf.validators.Required()])
+    # i think that this choices shouldn't be translated.
+    category = wtf.SelectField(lazy_gettext('Category'), choices=choicer([
         'Ambassadors', 'ARM', 'Cloud', 'Community', 'Design', 'Desktop',
         'Fonts', 'Games', 'Hardware', 'Infrastructure', 'Kernel', 'Marketing',
         'QA', 'Security', 'SIG', 'Other',
     ]))
-    type_ = wtf.SelectField('Type', choices=choicer([
-        'Talk (45 min)', 'Workshop (2 hours)',
+    type_ = wtf.SelectField(lazy_gettext('Type'), choices=choicer([
+        lazy_gettext('Talk (45 min)'), lazy_gettext('Workshop (2 hours)'),
     ]))
-    abstract = wtf.TextAreaField('Presentation abstract', [wtf.validators.Required()])
+    abstract = wtf.TextAreaField(lazy_gettext('Presentation abstract'), [wtf.validators.Required()])
 
 
 # Requests
@@ -166,7 +180,7 @@ def favicon():
 @app.route('/new', methods=['GET', 'POST'])
 def new():
     if datetime.utcnow() > app.config['REGISTRATION_DEADLINE']:
-        flask.flash('The registration period has closed')
+        flask.flash(gettext('The registration period has closed'))
         return flask.redirect(flask.url_for('index'))
     if flask.g.user is None:
         return flask.redirect(flask.url_for('login'))
@@ -184,7 +198,7 @@ def new():
     if flask.g.fasusername:
         form.fasusername.data = flask.g.fasusername
     return flask.render_template('registration.html', form=form,
-                                 submit_text="Submit registration")
+                                 submit_text=gettext("Submit registration"))
 
 
 @app.route('/proposals')
@@ -222,7 +236,7 @@ def admin(action, id):
 @app.route('/submit_proposal', methods=['GET', 'POST'])
 def submit_proposal():
     if datetime.utcnow() >= app.config['SUBMISSION_DEADLINE']:
-        flask.flash('The presentation submission period has closed')
+        flask.flash(gettext('The presentation submission period has closed'))
         return flask.redirect(flask.url_for('proposals'))
     if flask.g.user is None:
         return flask.redirect(flask.url_for('login'))
@@ -248,7 +262,7 @@ def submit_proposal():
     if flask.g.fasusername:
         form.fasusername.data = flask.g.fasusername
     return flask.render_template('proposal.html', form=form,
-                                 submit_text="Submit proposal")
+                                 submit_text=gettext("Submit proposal"))
 
 
 @app.route('/edit_proposal')
@@ -284,8 +298,8 @@ def edit_one_proposal(id):
         flask.flash('Proposal updated')
         return flask.redirect(flask.url_for('proposals'))
     return flask.render_template('proposal.html', form=form,
-                                 submit_text="Edit proposal",
-                                 delete_text="Delete proposal",
+                                 submit_text=gettext("Edit proposal"),
+                                 delete_text=gettext("Delete proposal"),
                                  uuid=id)
 
 
@@ -303,9 +317,9 @@ def delete_one_proposal(id):
     if flask.request.method == 'POST' and form.validate():
         if form.confirmbox.data:
             mongo.db.proposals.remove({'_id': id, 'openid': flask.g.user})
-            flask.flash('Proposal deleted')
+            flask.flash(gettext('Proposal deleted'))
         else:
-            flask.flash('Proposal not deleted')
+            flask.flash(gettext('Proposal not deleted'))
         return flask.redirect(flask.url_for('proposals'))
     return flask.render_template('delete_confirm.html', form=form)
 
@@ -341,13 +355,13 @@ def edit_one(id):
         form.populate_obj(registration)
         registration['modified'] = datetime.utcnow()
         mongo.db.registrations.save(registration.toDict())
-        flask.flash('Registration updated')
+        flask.flash(gettext('Registration updated'))
         #if not oldfunding and registration.funding:
             #flask.flash(flask.Markup(app.config['FUNDING_PROMPT']))
         return flask.redirect(flask.url_for('index'))
     return flask.render_template('registration.html', form=form,
-                                 submit_text="Edit registration",
-                                 delete_text="Delete registration",
+                                 submit_text=gettext("Edit registration"),
+                                 delete_text=gettext("Delete registration"),
                                  uuid=id)
 
 
@@ -365,9 +379,9 @@ def delete_one(id):
     if flask.request.method == 'POST' and form.validate():
         if form.confirmbox.data:
             mongo.db.registrations.remove({'_id': id, 'openid': flask.g.user})
-            flask.flash('Registration deleted')
+            flask.flash(gettext('Registration deleted'))
         else:
-            flask.flash('Registration not deleted')
+            flask.flash(gettext('Registration not deleted'))
         return flask.redirect(flask.url_for('index'))
     return flask.render_template('delete_confirm.html', form=form)
 
@@ -399,9 +413,9 @@ def create_or_login(resp):
     flask.session['openid'] = resp.identity_url
     user = flask.session['openid']
     if user is not None:
-        flask.flash(u'Welcome, %s' % flask.session['openid'])
+        flask.flash(gettext(u'Welcome'), '%s' % flask.session['openid'])
         flask.g.user = user
     return flask.redirect(oid.get_next_url())
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
