@@ -2,7 +2,9 @@
 {% block title %}Presentation Proposals{% endblock %}
 {% block body %}
 
-<p>{{ _('Planning to attend') }} <a href="{{ config.FUDCON_URL }}">{{ config.FUDCON_NAME}} {{ config.FUDCON_YEAR }}</a>? <strong><a href="/new">{{ _('Pre-register now') }}</a></strong> or <strong><a href="/edit">{{ _('edit your registration') }}</a></strong> {{ _('(Tip: you can register multiple people with one login)') }}</p>
+{% autoescape false %}
+<p>{{ _('Planning to attend %(fudcon)s?', fudcon='<a href="%s">%s %s</a>' % (config.FUDCON_URL, config.FUDCON_NAME, config.FUDCON_YEAR)) }} <strong><a href="/new">{{ _('Pre-register now') }}</a></strong> or <strong><a href="/edit">{{ _('edit your registration') }}</a></strong> {{ _('(Tip: you can register multiple people with one login)') }}</p>
+{% endautoescape %}
 
 {% if now < config.SUBMISSION_DEADLINE %}
 <p>{{ _('Want to give a presentation?') }} <strong><a href="/submit_proposal">{{ _('submit a proposal') }}</a></strong> or <strong><a href="/edit_proposal"> {{ _('edit an existing proposal') }}</a></strong>.</p>
@@ -11,7 +13,7 @@
 {% if now < config.VOTING_DEADLINE %}
 <p>{{ _('Vote for your favorite proposals') }} <strong><a href="{{ config.VOTING_URL }}">{{ _('here!') }}</a></strong> The voting period ends on {{ config.VOTING_DEADLINE }} UTC.</p>
 {% else %}
-<p>The proposal voting period ended on {{ config.VOTING_DEADLINE }} UTC. You can view the results <strong><a href="{{ config.VOTING_RESULTS }}">here</a></strong></p>
+<p>{{ _('The proposal voting period ended on') }} {{ config.VOTING_DEADLINE }} {{_('UTC. You can view the results') }} <strong><a href="{{ config.VOTING_RESULTS }}">here</a></strong></p>
 {% endif %}
 {% endif %}
 
@@ -38,9 +40,9 @@
     <td>{{ proposal.type_|e }}</td>
     {% if admin %}
       {% if proposal.rejected %}
-        <td><a href="/admin/accept/{{ proposal._id }}">Accept</a></td>
+        <td><a href="/admin/accept/{{ proposal._id }}">{{ _('Accept') }}</a></td>
       {% else %}
-        <td><a href="/admin/reject/{{ proposal._id }}">Reject</a></td>
+        <td><a href="/admin/reject/{{ proposal._id }}">{{ _('Reject') }}</a></td>
       {% endif %}
     {% endif %}
   </tr>
