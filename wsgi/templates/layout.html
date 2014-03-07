@@ -9,7 +9,7 @@
   <body>
     <div id="header">
       <h1>{{ config.FUDCON_NAME }} &mdash; {{ config.FUDCON_DATES }}, {{ config.FUDCON_YEAR }}</h1>
-      <h2>Pre-registration</h2>
+      <h2>{{ _('Pre-registration') }}</h2>
     </div>
     {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -22,9 +22,9 @@
     {% endwith %}
     <div id="content">
     {% if session['openid'] %}
-      <p class="gray">You are logged in as {{ session['openid'] }} &mdash; <a href="/logout">Log out</a></p>
+      <p class="gray">{{ _('You are logged in as %(openid)s', openid='%s' % (session['openid'])) }} &mdash; <a href="/logout">{{ _('Log out') }}</a></p>
     {% else %}
-      <p class="gray">You are not logged in &mdash; <a href="/login">Log in</a></p>
+      <p class="gray">{{ _('You are not logged in &mdash;') }} <a href="/login">{{_('Log in') }}</a></p>
     {% endif %}
     {% block body %}{% endblock %}
     </div>
