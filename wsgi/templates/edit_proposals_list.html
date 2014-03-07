@@ -1,19 +1,19 @@
 {% extends "layout.html" %}
-{% block title %}Presentation Proposals{% endblock %}
+{% block title %}{{ _('Presentation Proposals') }}{% endblock %}
 {% block body %}
 
-<p>There are multiple proposals for your OpenID. Select the one you wish to edit.</p>
+<p>{{ _('There are multiple proposals for your OpenID. Select the one you wish to edit.') }}</p>
 
 <table>
   <tr>
     <th></th>
-    <th>Name</th>
-    <th>Title</th>
-    <th>Abstract</th>
+    <th>{{ _('Name') }}</th>
+    <th>{{ _('Title') }}</th>
+    <th>{{ _('Abstract') }}</th>
   </tr>
   {% for proposal in proposals %}
   <tr>
-    <td><a href="/edit_proposal/{{ proposal._id }}">Edit</a></td>
+    <td><a href="/edit_proposal/{{ proposal._id }}">{{ _('Edit') }}</a></td>
     <td>{% if proposal.fasusername %}<a href="http://fedoraproject.org/wiki/User:{{ proposal.fasusername|e }}">{% endif %}{{ proposal.firstname|e }} {{ proposal.lastname|e }}{% if proposal.fasusername %}</a>{% endif %}</td>
     <td>{{ proposal.title|e }}</td>
     <td>{{ proposal.abstract|e }}</td>
