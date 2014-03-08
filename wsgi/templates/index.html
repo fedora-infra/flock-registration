@@ -1,52 +1,54 @@
 {% extends "layout.html" %}
-{% block title %}Pre-registration{% endblock %}
+{% block title %}{{ _('Pre-registration') }}{% endblock %}
 {% block body %}
 
-<p>Planning to attend <a href="{{ config.FUDCON_URL }}">{{ config.FUDCON_NAME}} {{ config.FUDCON_YEAR }}</a>? <strong><a href="/new">Pre-register now</a></strong> or <strong><a href="/edit">edit your registration</a></strong> (Tip: you can register multiple people with one login)</p>
+{% autoescape false %}
+<p>{{ _('Planning to attend %(fudcon)s?', fudcon='<a href="%s">%s %s</a>' % (config.FUDCON_URL, config.FUDCON_NAME, config.FUDCON_YEAR)) }} <strong><a href="/new">{{ _('Pre-register now') }}</a></strong> {{ _('or') }} <strong><a href="/edit">{{ _('edit your registration') }}</a></strong> {{ _('(Tip: you can register multiple people with one login)') }}</p></p>
+{% endautoescape %}
 
 {% if now < config.SUBMISSION_DEADLINE %}
-<p>Want to give a presentation? <strong><a href="/submit_proposal">Submit a proposal</a></strong> or <strong><a href="/edit_proposal">edit an existing proposal</a></strong>. You can view all of the current proposals <strong><a href="/proposals">here</a></strong>.</p>
+<p>{{ _('Want to give a presentation?')  }} <strong><a href="/submit_proposal">{{ _('Submit a proposal') }}</a></strong> {{ _('or') }} <strong><a href="/edit_proposal">{{ _('edit an existing proposal') }}</a></strong>. {{ _('You can view all of the current proposals') }} <strong><a href="/proposals"> {{ _('here') }}</a></strong>.</p>
 {% else %}
-<p>The presentation submission period has closed. You can view all of the current proposals <strong><a href="/proposals">here</a></strong>.</p>
+<p>{{ _('The presentation submission period has closed. You can view all of the current proposals') }} <strong><a href="/proposals"> {{ _('here') }}</a></strong>.</p>
 {% if now < config.VOTING_DEADLINE %}
-<p>You still have until {{ config.VOTING_DEADLINE }} UTC to <strong><a href="{{ config.VOTING_URL }}">vote</a></strong> on the proposals!</p>
+<p>{{ _('You still have until') }} {{ config.VOTING_DEADLINE }} {{ _('UTC to') }} <strong><a href="{{ config.VOTING_URL }}"> {{ _('vote') }}</a></strong> {{ _('on the proposals!') }}</p>
 {% else %}
-<p>The proposal voting period ended on {{ config.VOTING_DEADLINE }} UTC. You can view the results <strong><a href="{{ config.VOTING_RESULTS }}">here</a></strong></p>
+<p>{{ _('The proposal voting period ended on') }} {{ config.VOTING_DEADLINE }} {{ _('UTC. You can view the results') }} <strong><a href="{{ config.VOTING_RESULTS }}">here</a></strong></p>
 {% endif %}
 {% endif %}
 
-<h2>Pre-registration list</h2>
+<h2>{{ _('Pre-registration list') }}</h2>
 
 <table>
   <tr>
     <th>#</th>
-    <th>Name</th>
-    <th>Location</th>
-    <th><abbr title="Needs invitation letter">Invitation letter</abbr></th>
-    <th><abbr title="Needs flight funding">Flight funding</abbr></th>
-    <th><abbr title="Needs hotel funding">Hotel funding</abbr></th>
-    <th><abbr title="Vegan or vegetarian">Veg</abbr></th>
-    <th>Volunteer?</th>
-    <th>Bringing family?</th>
-    <th><abbr title="T-shirt size">Size</abbr></th>
-    <th>Roomshare?</th>
-    <th>Hotel booked?</th>
-    <th>Blog</th>
-    <th>Twitter</th>
-    <th>Comments</th>
-    <th>Extra line on badge</th>
+    <th>{{ _('Name') }}</th>
+    <th>{{ _('Location') }}</th>
+    <th><abbr title="Needs invitation letter">{{ _('Invitation letter') }}</abbr></th>
+    <th><abbr title="Needs flight funding">{{ _('Flight funding') }}</abbr></th>
+    <th><abbr title="Needs hotel funding">{{ _('Hotel funding') }}</abbr></th>
+    <th><abbr title="Vegan or vegetarian">{{ _('Veg') }}</abbr></th>
+    <th>{{ _('Volunteer?') }}</th>
+    <th>{{ _('Bringing family?') }}</th>
+    <th><abbr title="T-shirt size">{{ _('Size') }}</abbr></th>
+    <th>{{ _('Roomshare?') }}</th>
+    <th>{{ _('Hotel booked?') }}</th>
+    <th>{{ _('Blog') }}</th>
+    <th>{{ _('Twitter') }}</th>
+    <th>{{ _('Comments') }}</th>
+    <th>{{ _('Extra line on badge') }}</th>
   </tr>
   {% for registration in registrations %}
   <tr>
     <td>{{ loop.index }}</td>
     <td>{% if registration.fasusername %}<a href="http://fedoraproject.org/wiki/User:{{ registration.fasusername|e }}">{% endif %}{{ registration.firstname|e }} {{ registration.middlename|e}} {{ registration.lastname|e }}{% if registration.fasusername %}</a>{% endif %}</td>
     <td>{{ registration.location|e }}</td>
-    <td>{% if registration.invitation_letter %}Yes{% else %}No{% endif %}</td>
-    <td>{% if registration.flight_funding %}Yes{% else %}No{% endif %}</td>
-    <td>{% if registration.hotel_funding %}Yes{% else %}No{% endif %}</td>
+    <td>{% if registration.invitation_letter %}{{ _('Yes') }}{% else %}{{ _('No') }}{% endif %}</td>
+    <td>{% if registration.flight_funding %}{{ _('Yes') }}{% else %}{{ _('No') }}{% endif %}</td>
+    <td>{% if registration.hotel_funding %}{{ _('Yes') }}{% else %}{{ _('No') }}{% endif %}</td>
     <td>{{ registration.veg|e }}</td>
-    <td>{% if registration.volunteer%}Yes{% else %}No{% endif %}</td>
-    <td>{% if registration.family != "No" %}Yes{% else %}No{% endif %}</td>
+    <td>{% if registration.volunteer%}{{ _('Yes') }}{% else %}{{ _('No') }}{% endif %}</td>
+    <td>{% if registration.family != "No" %}{{ _('Yes') }}{% else %}{{ _('No') }}{% endif %}</td>
     <td>{{ registration.size|e }}</td>
     <td>{% if registration.roomshare == "Found roommate" %}{{ registration.roommate|e }}{% else %}{{ registration.roomshare|e }}{% endif %}</td>
     <td>{{ registration.hotel_booked|e }}</td>

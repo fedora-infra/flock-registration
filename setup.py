@@ -8,5 +8,11 @@ setup(
     author='Ian Weller, Luke Macken',
     author_email='ianweller@fedoraproject.org',
     url='http://fedoraproject.org/wiki/FUDCon',
-    install_requires=['Flask', 'Flask-OpenID', 'Flask-PyMongo', 'Flask-WTF', 'bunch'],
+    install_requires=['Flask',
+                      'Flask-OpenID',
+                      'Flask-PyMongo',
+                      'Flask-WTF',
+                      'bunch',
+                      'Flask-Babel',
+                      'Flask-Script'],
 )

@@ -1,8 +1,10 @@
 {% extends "layout.html" %}
-{% block title %}Pre-registration{% endblock %}
+{% block title %}{{ _('Pre-registration') }}{% endblock %}
 {% block body %}
 
-<p>You are not yet registered. <a href="/new">Register</a> or <a href="/">go back</a></p>
+{% autoescape false %}
+<p>{{ _('You are not yet registered.') }}<a href="/new">{{ _('Register') }}</a> or <a href="/">{{ _('go back') }}</a></p>
+{% endautoescape %}
 
 {% endblock %}
 {# vim: set ts=2 sw=2 sta et: #}
