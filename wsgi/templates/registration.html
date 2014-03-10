@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 {% from "_formhelpers.html" import render_field %}
-{% block title %}Pre-register{% endblock %}
+{% block title %}{{ _('Pre-register') }}{% endblock %}
 {% block body %}
 
 <script src="/static/jquery-1.11.0.min.js"></script>
@@ -26,38 +26,38 @@ $(document).ready(function(){
     {{ render_field(form.lastname) }}
   </fieldset>
   <div class="help">
-    <p>Your name will appear as two lines on your conference badge.</p>
+    <p>{{ _('Your name will appear as two lines on your conference badge.') }}</p>
   </div>
   <fieldset>
     {{ render_field(form.email) }}
   </fieldset>
   <div class="help">
-    <p>Your email address.</p>
+    <p>{{ _('Your email address.') }}</p>
   </div>
   <fieldset>
     {{ render_field(form.fasusername) }}
   </fieldset>
   <div class="help">
-    <p>If you include a FAS username, the QR code on your badge will contain your Fedora Project email and a URL to your wiki page.</p>
+    <p>{{ _('If you include a FAS username, the QR code on your badge will contain your Fedora Project email and a URL to your wiki page.') }}</p>
   </div>
   <fieldset>
     {{ render_field(form.location) }}
   </fieldset>
   <div class="help">
-    <p>Where you are located.</p>
+    <p>{{ _('Where you are located.') }}</p>
   </div>
   <fieldset>
     {{ render_field(form.invitation_letter) }}
   </fieldset>
   <div class="help">
-    <p>If you need an invitation letter to attend.</p>
+    <p>{{ _('If you need an invitation letter to attend.') }}</p>
   </div>
   <fieldset>
     {{ render_field(form.hotel_funding) }}
     {{ render_field(form.flight_funding) }}
   </fieldset>
   <div class="help">
-    <p>Check theses boxes if you need funding to attend.</p>
+    <p>{{ _('Check theses boxes if you need funding to attend.') }}</p>
   </div>
 
   <div id="flight_details">
@@ -80,26 +80,26 @@ $(document).ready(function(){
     {{ render_field(form.veg) }}
   </fieldset>
   <div class="help">
-    <p>If you would prefer vegan or vegetarian fare for any meals we provide during the event, we will do our best to make sure everyone is accommodated.</p>
+    <p>{{ _('If you would prefer vegan or vegetarian fare for any meals we provide during the event, we will do our best to make sure everyone is accommodated.') }}</p>
   </div>
   <fieldset>
     {{ render_field(form.volunteer) }}
   </fieldset>
   <div class="help">
-    <p>If you wish to volunteer to help with the conference, select <strong>Yes</strong> here.</p>
+    <p>{{ _('If you wish to volunteer to help with the conference, select <strong>Yes</strong> here.') }}</p>
   </div>
   <fieldset>
     {{ render_field(form.family) }}
   </fieldset>
   <div class="help">
-    <p>Let us know if you plan to bring family (spouse, kids, etc), so we can have an idea of how many extra people will be at any events (re: parties) we throw.</p>
+    <p>{{ _('Let us know if you plan to bring family (spouse, kids, etc), so we can have an idea of how many extra people will be at any events (re: parties) we throw.') }}</p>
   </div>
   <fieldset>
     {{ render_field(form.roomshare) }}
     {{ render_field(form.roommate) }}
   </fieldset>
   <div class="help">
-    <p>If you want or need to share a room, select <strong>Yes</strong> here. Once you find a roommate, edit your registration and select <strong>Found roommate</strong>, then specify who that is in the Roommate box.</p>
+    <p>{{ _('If you want or need to share a room, select <strong>Yes</strong> here. Once you find a roommate, edit your registration and select <strong>Found roommate</strong>, then specify who that is in the Roommate box.') }}</p>
   </div>
   <fieldset>
     {{ render_field(form.hotel_booked) }}
@@ -110,7 +110,7 @@ $(document).ready(function(){
     {{ render_field(form.badge_line) }}
   </fieldset>
   <br class="clear">
-  <p class="buttons"><input type="submit" class="submit positive" value="{{ submit_text }}">{% if delete_text %}<a href="/delete/{{ uuid }}" class="submit negative">Delete registration</a>{% endif %} </p>
+  <p class="buttons"><input type="submit" class="submit positive" value="{{ submit_text }}">{% if delete_text %}<a href="/delete/{{ uuid }}" class="submit negative">{{ _('Delete registration') }}</a>{% endif %} </p>
   {{ form.csrf_token }}
 </form>
 
