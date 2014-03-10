@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='flock-registration',
-    version='0.1',
+    version='0.2.0',
     license='GPLv2+',
     description='A Flask-based application for handling Fedora Flock registrations',
     author='Ian Weller, Luke Macken',
