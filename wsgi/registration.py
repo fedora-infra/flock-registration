@@ -249,6 +249,9 @@ def admin(action, id):
         return flask.redirect(flask.url_for('proposals'))
     if action == 'reject':
         proposal['rejected'] = True
+        openid = proposal['openid']
+        app.logger.info('Removing all registrations for %s' % openid)
+        mongo.db.registrations.remove({'openid': openid})
     else:
         proposal['rejected'] = False
     mongo.db.proposals.save(proposal)
