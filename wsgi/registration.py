@@ -33,6 +33,10 @@ import os
 app = flask.Flask(__name__)
 app.config.from_pyfile('config.py')
 
+from flask_wtf.csrf import CsrfProtect
+csrf = CsrfProtect()
+csrf.init_app(app)
+
 # Set up babel for translations
 babel = Babel(app)
 
