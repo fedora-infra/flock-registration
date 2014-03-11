@@ -10,6 +10,7 @@
     <input type="hidden" name="fas" value="true">
     <input type="submit" value="Sign in with Fedora Account">
     <input type="hidden" name="next" value="{{ next }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
   </form>
 </div>
 
@@ -20,6 +21,7 @@
     <input type="text" name="openid" size="16" class="openid">
     <input type="submit" value="Sign in">
     <input type="hidden" name="next" value="{{ next }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
   </form>
 </div>
 

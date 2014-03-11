@@ -10,7 +10,7 @@
   </fieldset>
   <br class="clear">
   <p class="buttons"><input type="submit" class="submit negative" value="{{ _('Delete registration') }}"></p>
-  {{ form.csrf_token }}
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 </form>
 
 {% endblock %}

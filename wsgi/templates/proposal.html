@@ -23,7 +23,7 @@
   </fieldset>
   <br class="clear">
   <p class="buttons"><input type="submit" class="submit positive" value="{{ submit_text }}">{% if delete_text %}<a href="/delete_proposal/{{ uuid }}" class="submit negative">{{ _('Delete proposal') }}</a>{% endif %} </p>
-  {{ form.csrf_token }}
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 </form>
 
 {% endblock %}
