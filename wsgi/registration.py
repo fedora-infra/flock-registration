@@ -129,7 +129,12 @@ class RegistrationForm(wtf.Form):
                          lazy_gettext('L'),
                          lazy_gettext('XL'),
                          lazy_gettext('2XL'),
-                         lazy_gettext('3XL')]))
+                         lazy_gettext('3XL'),
+                         lazy_gettext('Womens S'),
+                         lazy_gettext('Womens M'),
+                         lazy_gettext('Womens L'),
+                         lazy_gettext('Womens XL'),
+                         ]))
     roomshare = wtf.SelectField(
         lazy_gettext('Room share'),
         choices=choicer([lazy_gettext('No'),
