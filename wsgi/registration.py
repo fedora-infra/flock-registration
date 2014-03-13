@@ -184,9 +184,9 @@ class PresentationProposalForm(wtf.Form):
 @app.before_request
 def lookup_current_user():
     flask.g.user = None
+    flask.g.fasusername = None
     if 'openid' in flask.session:
         flask.g.user = flask.session['openid']
-        flask.g.fasusername = None
         if 'id.fedoraproject.org' in flask.g.user:
             try:
                 flask.g.fasusername = flask.g.user.split('//')[1].split('.')[0]
