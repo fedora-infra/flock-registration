@@ -3,13 +3,61 @@
   <head>
     <title>{{ config.FUDCON_NAME }} {{ config.FUDCON_YEAR }} &mdash; {% block title %}{% endblock %}</title>
     <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
     <link rel="stylesheet" href="/static/style.css">
     <link rel="shortcut icon" href="/static/favicon.ico">
   </head>
   <body>
-    <div id="header">
-      <h1>{{ config.FUDCON_NAME }} &mdash; {{ config.FUDCON_DATES }}, {{ config.FUDCON_YEAR }}</h1>
-      <h2>{{ _('Pre-registration') }}</h2>
+    <nav class="navbar navbar-inverse flock-navbar" role="navigation">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">{{ config.FUDCON_NAME }} &mdash; {{ config.FUDCON_DATES }}, {{ config.FUDCON_YEAR }}</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse pull-right" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {% if session['openid'] %}
+              <li>
+                <a href="#" title="{{ session['openid'] }}">
+                  <icon class="glyphicon glyphicon-user"></icon> {{ session['openid'] }}</a>
+              </li>
+              <li>
+                <a href="/logout">
+                  <icon class="glyphicon glyphicon-log-out"></icon>
+                </a>
+              </li>
+            {% else %}
+              <li>
+                <a href="/login">{{_('Login') }}</a>
+              </li>
+            {% endif %}
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+
+
+    <div class="jumbotron flock-masthead">
+      <div class="container">
+        <h2>{{ _('Pre-registration') }}</h2>
+      </div>
     </div>
     {% with messages = get_flashed_messages() %}
       {% if messages %}
@@ -21,13 +69,12 @@
       {% endif %}
     {% endwith %}
     <div id="content">
-    {% if session['openid'] %}
-      <p class="gray">{{ _('You are logged in as %(openid)s', openid='%s' % (session['openid'])) }} &mdash; <a href="/logout">{{ _('Log out') }}</a></p>
-    {% else %}
-      <p class="gray">{{ _('You are not logged in &mdash;') }} <a href="/login">{{_('Log in') }}</a></p>
-    {% endif %}
     {% block body %}{% endblock %}
     </div>
+
+    <script src="/static/jquery-1.11.0.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
   </body>
 </html>
 {# vim: set ts=2 sw=2 sta et: #}
