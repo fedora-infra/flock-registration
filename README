@@ -8,7 +8,7 @@ and FUDCON_*. Then the application should Just Work(tm).
 
 Creating the app
 
-    rhc app create -a flock -t python-2.6
+    rhc app create -a flock -t python-2.7
 
 Adding a mongodb cartridge
 
