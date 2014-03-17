@@ -307,6 +307,7 @@ button.disabled {
 	background-image: inherit;
 	background-repeat: inherit;
 	border-radius: 0px;
+	margin-bottom: 0px;
 }
 
 .navbar-inverse .navbar-brand, .navbar-inverse .navbar-nav>li>a {
