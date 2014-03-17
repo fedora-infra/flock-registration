@@ -12,7 +12,7 @@ Creating the app
 
 Adding a mongodb cartridge
 
-    rhc cartridge add --app flock mongodb-2.2
+    rhc cartridge add --app flock mongodb-2.4
 
 Exporting the registrations as JSON
 
