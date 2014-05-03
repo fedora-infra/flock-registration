@@ -40,7 +40,7 @@ babel = Babel(app)
 app.secret_key = app.config['SESSION_SECRET_KEY']
 
 # Set up OpenID
-oid = OpenID(app, app.config['OPENID_STORE'])
+oid = OpenID(app, fs_store_path=app.config['OPENID_STORE'], safe_roots=[])
 
 # Set up MongoDB
 mongo = PyMongo(app)
