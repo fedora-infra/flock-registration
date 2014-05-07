@@ -275,7 +275,7 @@ def admin_rejected():
     """ An admin view to list reject proposals """
     if flask.g.fasusername not in app.config['ADMINS']:
         flask.abort(401)
-    proposals = mongo.db.proposals.find_one({'rejected': True})
+    proposals = mongo.db.proposals.find({'rejected': True})
     usernames = [p.fasusername for p in proposals]
     return flask.jsonify(usernames=usernames)
 
