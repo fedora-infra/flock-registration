@@ -17,6 +17,13 @@
 {% endif %}
 {% endif %}
 
+{% if admin %}
+<h2>Admin views:</h2>
+<ul>
+  <li><a href="/admin/rejected">Users that submitted rejected proposals</a></li>
+</ul>
+{% endif %}
+
 <h2>{{ _('Presentation Proposals') }}</h2>
 
 <table>
