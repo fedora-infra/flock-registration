@@ -270,6 +270,16 @@ def admin(action, id):
     return flask.redirect(flask.url_for('proposals'))
 
 
+@app.route('/admin/rejected')
+def admin_rejected():
+    """ An admin view to list reject proposals """
+    if flask.g.fasusername not in app.config['ADMINS']:
+        flask.abort(401)
+    proposals = mongo.db.proposals.find_one({'rejected': True})
+    usernames = [p.fasusername for p in proposals]
+    return flask.jsonify(usernames=usernames)
+
+
 @app.route('/submit_proposal', methods=['GET', 'POST'])
 def submit_proposal():
     if datetime.utcnow() >= app.config['SUBMISSION_DEADLINE']:
