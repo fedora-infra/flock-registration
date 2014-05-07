@@ -238,9 +238,7 @@ def new():
 @app.route('/proposals')
 def proposals():
     proposals = mongo.db.proposals.find(sort=[('created', 1)])
-    admin = False
-    if flask.g.fasusername in app.config['ADMINS']:
-        admin = True
+    admin = flask.g.fasusername in app.config['ADMINS']
     return flask.render_template('proposals.html', proposals=proposals,
                                  now=datetime.utcnow(), admin=admin)
 
