@@ -268,6 +268,18 @@ def admin(action, id):
     return flask.redirect(flask.url_for('proposals'))
 
 
+@app.route('/admin/proposals.txt')
+def admin_proposals_txt():
+    """ An admin view to list reject proposals """
+    if flask.g.fasusername not in app.config['ADMINS']:
+        flask.abort(401)
+    proposals = mongo.db.proposals.find().sort('fasusername', 1)
+    txt = '\n'.join(['%(fasusername)s %(title)s' % p for p in proposals])
+    resp = flask.make_response(txt)
+    resp.mimetype = 'text/plain'
+    return resp
+
+
 @app.route('/admin/rejected')
 def admin_rejected():
     """ An admin view to list reject proposals """
