@@ -270,7 +270,7 @@ def admin(action, id):
 
 @app.route('/admin/proposals.txt')
 def admin_proposals_txt():
-    """ An admin view to list reject proposals """
+    """ An admin view to list all proposals mapped to usernames """
     if flask.g.fasusername not in app.config['ADMINS']:
         flask.abort(401)
     proposals = mongo.db.proposals.find().sort('fasusername', 1)
