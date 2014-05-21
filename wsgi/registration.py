@@ -280,6 +280,31 @@ def admin_proposals_txt():
     return resp
 
 
+@app.route('/admin/proposal-submitters.txt')
+def proposal_submitters():
+    """ An admin view to list usernames mappeed to email address of people who
+    submitted proposals """
+    if flask.g.fasusername not in app.config['ADMINS']:
+        flask.abort(401)
+
+    txt = []
+    proposals = mongo.db.proposals.find().sort('fasusername', 1)
+    for proposal in proposals:
+        for username in proposal['fasusername'].replace(',', ' ').split():
+            reg = mongo.db.registrations.find_one({'fasusername': str(username)})
+            if not reg:
+                app.logger.error('Cannot find registration for user: %r' % username)
+                app.logger.error(repr(proposal))
+                continue
+            line = '%(fasusername)s %(email)s' % reg
+            if line not in txt:
+                txt.append(line)
+
+    resp = flask.make_response('\n'.join(txt))
+    resp.mimetype = 'text/plain'
+    return resp
+
+
 @app.route('/admin/rejected')
 def admin_rejected():
     """ An admin view to list reject proposals """
