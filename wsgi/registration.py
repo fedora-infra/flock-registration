@@ -305,8 +305,8 @@ def proposal_submitters():
     return resp
 
 
-@app.route('/admin/rejected')
-def admin_rejected():
+@app.route('/admin/proposals/rejected')
+def admin_rejected_proposals():
     """ An admin view to list reject proposals """
     if flask.g.fasusername not in app.config['ADMINS']:
         flask.abort(401)
