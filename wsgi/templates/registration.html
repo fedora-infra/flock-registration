@@ -42,6 +42,7 @@ $(document).ready(function(){
   </div>
   <fieldset>
     {{ render_field(form.location) }}
+    {{ render_field(form.near_westford) }}
   </fieldset>
   <div class="help">
     <p>{{ _('Where you are located.') }}</p>
@@ -52,6 +53,7 @@ $(document).ready(function(){
   <div class="help">
     <p>{{ _('If you need an invitation letter to attend.') }}</p>
   </div>
+
   <fieldset>
     {{ render_field(form.hotel_funding) }}
     {{ render_field(form.flight_funding) }}

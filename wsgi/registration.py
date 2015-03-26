@@ -93,6 +93,8 @@ class RegistrationForm(wtf.Form):
         lazy_gettext('Do you need an invitation letter to attend Flock?'))
     hotel_funding = wtf.BooleanField(lazy_gettext('Need hotel funding?'))
     flight_funding = wtf.BooleanField(lazy_gettext('Need flight funding?'))
+    near_westford = wtf.BooleanField(
+        lazy_gettext('Are you located in/near Westford, MA?'))
 
     month_of_birth = wtf.TextField(lazy_gettext('Month of Birth'))
     day_of_birth = wtf.TextField(lazy_gettext('Day of Birth'))
